@@ -29,7 +29,6 @@ public class WeaponSystem : ModuleRules
 				"InputCore",
                 "Niagara",
                 "UMG",
-                "Http",
                 "Json",
                 "JsonUtilities"
 			}
