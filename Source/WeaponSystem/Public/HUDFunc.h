@@ -25,7 +25,7 @@ class WEAPONSYSTEM_API UHUDFunc : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 	
 public:
-    /*Starts an analytics session without any custom attributes specified */
+    
     UFUNCTION(BlueprintCallable, Category="Widgets")
     static void RotateToPlayer(USceneComponent* RotateComponent, ACharacter* PlayerCharacter);
 

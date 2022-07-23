@@ -139,15 +139,12 @@ void AWeaponSystemProjectileBase::OnHit(UPrimitiveComponent* HitComponent, AActo
             FRotator RandomDecalRotation = UKismetMathLibrary::MakeRotFromX(Hit.ImpactNormal);
             RandomDecalRotation.Roll += FMath::RandRange(-180.0f, 180.0f);
             
-            
             float RandDecalLifeSpan = FMath::RandRange(DecalLifeSpanMin, DecalLifeSpanMax);
             
             ImpactDecalObject = UGameplayStatics::SpawnDecalAttached(Decal, DecalSize, OtherComp, "", DecalLocation, RandomDecalRotation, EAttachLocation::KeepWorldPosition, RandDecalLifeSpan);
             
-//            float DefDecalFadeOutDuration = 0.0f;
             if(DecalFadeOutEffect)
             {
-//                DefDecalFadeOutDuration = DecalFadeOutDuration;
                 ImpactDecalObject->SetFadeOut(RandDecalLifeSpan - DecalFadeOutDuration, DecalFadeOutDuration, false);
             }
 //            ImpactDecalObject->SetFadeScreenSize(0.00001f);

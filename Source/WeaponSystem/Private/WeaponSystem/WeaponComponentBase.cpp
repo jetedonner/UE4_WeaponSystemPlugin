@@ -50,8 +50,19 @@ void UWeaponComponentBase::FireShot(EWeaponFunction WeaponFunction)
     
     bool Handled = false;
     this->OnStartedShooting(WeaponFunction, Handled);
+    if(!Handled)
+    {
+        ExecFireShot(WeaponFunction);
+    }
 }
     
+void UWeaponComponentBase::OnStartedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled){
+    Handled = true;
+    
+    UDbg::DbgMsg(FString::Printf(TEXT("UWeaponComponentBase::OnStartedShooting_Implementation")), 5.0f, FColor::Purple);
+    ExecFireShot(WeaponFunction);
+}
+
 void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
 {
 
@@ -191,11 +202,4 @@ void UWeaponComponentBase::FinishReloading()
         ReadyForNewShot = true;
         GetWorld()->GetTimerManager().ClearTimer(ReloadingEndTimerHandle);
     }
-}
-
-void UWeaponComponentBase::OnStartedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled){
-    Handled = true;
-    
-    UDbg::DbgMsg(FString::Printf(TEXT("UWeaponComponentBase::OnStartedShooting_Implementation")), 5.0f, FColor::Purple);
-    ExecFireShot(WeaponFunction);
 }

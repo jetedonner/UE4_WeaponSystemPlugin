@@ -200,7 +200,7 @@ void UWeaponManagerComponent::StartShooting(EWeaponFunction WeaponFunction)
 
 void UWeaponManagerComponent::StopShooting()
 {
-    UDbg::DbgMsg(FString(TEXT("STOPPING SHOOTING")), 5.0f, FColor::Yellow);
+//    UDbg::DbgMsg(FString(TEXT("STOPPING SHOOTING")), 5.0f, FColor::Yellow);
     if(IsShooting)
     {
         IsShooting = false;

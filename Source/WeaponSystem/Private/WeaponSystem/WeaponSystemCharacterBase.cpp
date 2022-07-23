@@ -99,7 +99,7 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
            FHitResult hitResult;
            FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
            FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
-           DrawDebugLine(GetWorld(), Start, End, FColor(255, 0, 0), false, -1, 0, 5.0);
+//           DrawDebugLine(GetWorld(), Start, End, FColor(255, 0, 0), false, -1, 0, 5.0);
 
            bool isHit = GetWorld()->LineTraceSingleByChannel(hitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
 
@@ -108,7 +108,6 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
                AActor* HitActor = hitResult.GetActor();
                if (HitActor)
                {
-                   
                    AWeaponSystemCharacterBase* pChar = Cast<AWeaponSystemCharacterBase>(HitActor);
                    if (pChar && !IsAimedAtChar)
                    {
@@ -199,7 +198,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBP_PrimaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
             UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (primary) STARTED ..."));
-            UDbg::DbgMsg(FString(TEXT("SHOOTING PRIMARY!!!")), 5.0f, FColor::Orange);
+//            UDbg::DbgMsg(FString(TEXT("SHOOTING PRIMARY!!!")), 5.0f, FColor::Orange);
             WeaponManagerComponent->StartShooting();
 //            ActivateWeapon(PrimaryShootKey, WeaponDefinition->WeaponID);
         });
@@ -213,7 +212,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBR_PrimaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
             UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (primary) ENDED ..."));
-            UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED PRIMARY!!!")), 5.0f, FColor::Orange);
+//            UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED PRIMARY!!!")), 5.0f, FColor::Orange);
             WeaponManagerComponent->StopShooting();
 //            Delegate.ExecuteIfBound(Key, false);
         });
@@ -228,7 +227,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBP_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
             UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) STARTED ..."));
-            UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY!!!")), 5.0f, FColor::Yellow);
+//            UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StartShooting(EWeaponFunction::Secondary);
 //            ActivateWeapon(PrimaryShootKey, WeaponDefinition->WeaponID);
         });
@@ -240,7 +239,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBR_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
             UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) ENDED ..."));
-            UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED SECONDARY!!!")), 5.0f, FColor::Yellow);
+//            UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StopShooting();
 //            Delegate.ExecuteIfBound(Key, false);
         });
@@ -320,7 +319,7 @@ void AWeaponSystemCharacterBase::ProjectileHit(class AActor* ProjectileActor, cl
 
 void AWeaponSystemCharacterBase::EffectProgress(float Value)
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("EffectProgress: timeline: %f value:%f"), TimeLine.GetPlaybackPosition(), Value));
+//    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("EffectProgress: timeline: %f value:%f"), TimeLine.GetPlaybackPosition(), Value));
 }
 
 //void AWeaponSystemCharacterBase::StartTimeline()
