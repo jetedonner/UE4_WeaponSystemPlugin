@@ -91,10 +91,7 @@ void AWeaponSystemProjectileBase::OnHit(UPrimitiveComponent* HitComponent, AActo
         ResultStr = "Yes";
         TestActor->ExecActorHitHandler(this, Hit);
     }
-    
-//    UDbg::DbgMsg(FString::Printf(TEXT("AWeaponSystemProjectileBase::OnHit => %s TO %s, %s (%s)"), *HitComponent->GetName(), *OtherActor->GetName(), *OtherComp->GetName(), *ResultStr), 5.0f, FColor::Green);
-    
-    
+
     if(OtherActor->GetClass() != this->GetClass())
     {
         CollisionSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -142,13 +139,19 @@ void AWeaponSystemProjectileBase::OnHit(UPrimitiveComponent* HitComponent, AActo
             FRotator RandomDecalRotation = UKismetMathLibrary::MakeRotFromX(Hit.ImpactNormal);
             RandomDecalRotation.Roll += FMath::RandRange(-180.0f, 180.0f);
             
-//            UDbg::DbgMsg(FString::Printf(TEXT("RandomDecalRotation => %s"), *RandomDecalRotation.ToString()), 5.0f, FColor::Red);
             
-            ImpactDecalObject = UGameplayStatics::SpawnDecalAttached(Decal, DecalSize, OtherComp, "", DecalLocation, RandomDecalRotation, EAttachLocation::KeepWorldPosition, DecalLifeSpan);
+            float RandDecalLifeSpan = FMath::RandRange(DecalLifeSpanMin, DecalLifeSpanMax);
             
-            ImpactDecalObject->SetFadeOut(DecalLifeSpan - 2.5, 2.5, false);
-//            ImpactDecalObject->SetFadeScreenSize(10.0f);
-            ImpactDecalObject->FadeScreenSize = 0.00001f;
+            ImpactDecalObject = UGameplayStatics::SpawnDecalAttached(Decal, DecalSize, OtherComp, "", DecalLocation, RandomDecalRotation, EAttachLocation::KeepWorldPosition, RandDecalLifeSpan);
+            
+//            float DefDecalFadeOutDuration = 0.0f;
+            if(DecalFadeOutEffect)
+            {
+//                DefDecalFadeOutDuration = DecalFadeOutDuration;
+                ImpactDecalObject->SetFadeOut(RandDecalLifeSpan - DecalFadeOutDuration, DecalFadeOutDuration, false);
+            }
+//            ImpactDecalObject->SetFadeScreenSize(0.00001f);
+//            ImpactDecalObject->FadeScreenSize = 0.00001f;
         }
         
         this->OnProjectileHitDelegate.Broadcast(this, OtherActor, Hit.Location);

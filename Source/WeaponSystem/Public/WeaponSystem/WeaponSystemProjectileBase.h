@@ -97,9 +97,20 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     class UDecalComponent* ImpactDecalObject;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float DecalLifeSpan = 10.0f;
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    float DecalLifeSpan = 10.0f;
     
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System|Decal", meta=(ClampMin="2.5"))
+    float DecalLifeSpanMin = 5.0f;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System|Decal")
+    float DecalLifeSpanMax = 15.0f;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System|Decal")
+    bool DecalFadeOutEffect = true;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System|Decal", meta=(EditCondition="DecalFadeOutEffect"))
+    float DecalFadeOutDuration = 2.5f;
     
     UFUNCTION()
     void FireInDirection(const FVector& ShootDirection, bool& WasHandled);
