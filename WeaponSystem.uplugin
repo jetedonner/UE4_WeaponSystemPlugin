@@ -1,0 +1,33 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "WeaponSystem",
+	"Description": "Weapon System Base for creating and using different weapons in your game",
+	"Category": "Other",
+	"CreatedBy": "Kim David Hauser",
+	"CreatedByURL": "http://kimhauser.ch",
+	"DocsURL": "http://kimhauser.ch",
+	"MarketplaceURL": "",
+	"SupportURL": "http://kimhauser.ch",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "WeaponSystem",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+            "WhitelistPlatforms": [
+                "Mac", "Win64", "Linux"
+            ]
+		}
+	],
+    "Plugins": [
+        {
+          "Name": "Niagara",
+          "Enabled": true
+        }
+    ]
+}
