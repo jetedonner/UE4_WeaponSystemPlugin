@@ -49,5 +49,5 @@ Important/Additional Notes:
 This UE Weapon System Base Plugin is created, released and maintained by Kim David Hauser with the intent of making it easier for beginners and advanced UE Devs to start creating a Weapon System for their UE Game Projects. The Plugin is of course by far not 100% what you have in your mind for setting up your own game, but it can be used as a powerfull start library - and with a little bit of amendment here and there you should be able really quick setting up your own Weapon System. 
 What I manly did for this project was consolidating the most important stuff that I need every time over and over again when I start creating a new 1st / 3rd person shooter or similar. Please also check out my other projects.
 
-- PlayerStartPlugin
+- [PlayerStartPlugin on GitHub](https://github.com/jetedonner/PlayerStartPlugin)
 - <http://kimhauser.ch> / <kim@kimhauser.ch>
