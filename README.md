@@ -50,4 +50,7 @@ This UE Weapon System Base Plugin is created, released and maintained by Kim Dav
 What I manly did for this project was consolidating the most important stuff that I need every time over and over again when I start creating a new 1st / 3rd person shooter or similar. Please also check out my other projects.
 
 - [PlayerStartPlugin on GitHub](https://github.com/jetedonner/PlayerStartPlugin)
-- <http://kimhauser.ch> / <kim@kimhauser.ch>
+- Websites / Email
+    - <http://kimhauser.ch>
+    - <http://job.kimhauser.ch>
+    - <kim@kimhauser.ch>
