@@ -36,6 +36,8 @@ class WEAPONSYSTEM_API UWeaponComponentBase : public UActorComponent
 public:
     
 	UWeaponComponentBase();
+
+    UWeaponComponentBase(const FObjectInitializer& ObjectInitializer);
     
     UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     float ExampleVariable;
@@ -60,7 +62,10 @@ public:
     FTimerHandle ReloadingStartTimerHandle;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float ExampleTest;
+    float ExampleTestNG;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float KimsVar = 123.0f;
     
     UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
     void SetIsReloading(const bool NewVal)

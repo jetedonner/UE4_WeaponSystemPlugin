@@ -14,7 +14,6 @@ AWeaponSystemCharacterBase::AWeaponSystemCharacterBase()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 AWeaponSystemCharacterBase::AWeaponSystemCharacterBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -22,6 +21,8 @@ AWeaponSystemCharacterBase::AWeaponSystemCharacterBase(const FObjectInitializer&
     PrimaryActorTick.bCanEverTick = true;
     
     UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase::AWeaponSystemCharacterBase() WITH ObjectInitializer !!!"));
+
+    UE_LOG(LogTemp, Warning, TEXT("HOT RELOAD TEST"));
     
     if(!WeaponManagerComponent){
         

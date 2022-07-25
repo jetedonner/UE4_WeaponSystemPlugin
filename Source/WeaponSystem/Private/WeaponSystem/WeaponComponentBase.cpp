@@ -10,7 +10,25 @@
 
 UWeaponComponentBase::UWeaponComponentBase()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.TickGroup = TG_PrePhysics;
+    PrimaryComponentTick.bStartWithTickEnabled = true;
+    PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.SetTickFunctionEnable(true);
+    bAutoActivate = true;
+    bAllowReregistration = true;
+    bAutoRegister = true;
+}
+
+UWeaponComponentBase::UWeaponComponentBase(const FObjectInitializer& ObjectInitializer /*= FObjectInitializer::Get()*/)
+    : Super(ObjectInitializer)
+{
+    PrimaryComponentTick.TickGroup = TG_PrePhysics;
+    PrimaryComponentTick.bStartWithTickEnabled = true;
+    PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.SetTickFunctionEnable(true);
+    bAutoActivate = true;
+    bAllowReregistration = true;
+    bAutoRegister = true;
 }
 
 // Called when the game starts
