@@ -22,16 +22,9 @@ class WEAPONSYSTEM_API UCrosshairUserWidgetBase : public UUserWidget
 {
 	GENERATED_BODY()
     
-//public:
-    
-//    UCrosshairUserWidgetBase();
-
 protected:
     const FName AimedAnimationName = FName("AimedAnimation");
-//    virtual void BeginPlay() override;
-
-    // Doing setup in the C++ constructor is not as
-    // useful as using NativeConstruct.
+    
     virtual void NativeConstruct() override;
     
 public:
@@ -51,7 +44,6 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Weapon System")
     void PlayAimedAtAnimation(bool AlternativeAnimation = false);
     
-//    UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Weapon System")
     void OnAnimateCrosshair_Implementation(bool AlternativeAnimation = false);
     
     UPROPERTY(BlueprintAssignable, Category="Weapon System")

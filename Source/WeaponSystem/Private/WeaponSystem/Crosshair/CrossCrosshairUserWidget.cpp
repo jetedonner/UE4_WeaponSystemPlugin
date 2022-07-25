@@ -1,8 +1,8 @@
 //
-//  CircleCrosshairUserWidget.cpp
+//  CrossCrosshairUserWidget.cpp
 //  UE4 WeaponSystem Plugin
 //
-//  Created by Kim David Hauser on 09.07.22.
+//  Created by Kim David Hauser on 25.07.22.
 //  Copyright © 1991 - 2022 DaVe Inc. kimhauser.ch, All rights reserved.
 //
 

@@ -1,5 +1,5 @@
 //
-//  CrosshairUserWidgetBase.h
+//  CircleCrosshairUserWidget.h
 //  UE4 WeaponSystem Plugin
 //
 //  Created by Kim David Hauser on 05.07.22.
@@ -20,10 +20,8 @@
 #include "CircleCrosshairUserWidget.generated.h"
 
 /**
- * 
- */
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCrosshairAnimationDelegate, bool, AlternativeAnimation);
 
+ */
 UCLASS()
 class WEAPONSYSTEM_API UCircleCrosshairUserWidget : public UCrosshairUserWidgetBase
 {
@@ -42,27 +40,5 @@ public:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
     int NumSegments = 60;
-    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
-//    FLinearColor Tint = FLinearColor::Yellow;
-//    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
-//    bool bAntiAlias = true;
-//    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
-//    float Thickness = 30.0f;
-    
-//    UWidgetAnimation* GetAnimationByName(FName AnimationName) const;
-//
-//    bool PlayAnimationByName(FName AnimationName,
-//        float StartAtTime,
-//        int32 NumLoopsToPlay,
-//        EUMGSequencePlayMode::Type PlayMode,
-//        float PlaybackSpeed);
-//
-//protected:
-//    TMap<FName, UWidgetAnimation*> AnimationsMap;
-//
-//    void FillAnimationsMap();
     
 };

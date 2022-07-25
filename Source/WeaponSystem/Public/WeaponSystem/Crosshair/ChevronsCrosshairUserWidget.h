@@ -1,8 +1,8 @@
 //
-//  CrossCrosshairUserWidgetBase.h
+//  ChevronsCrosshairUserWidget.h
 //  UE4 WeaponSystem Plugin
 //
-//  Created by Kim David Hauser on 05.07.22.
+//  Created by Kim David Hauser on 25.07.22.
 //  Copyright © 1991 - 2022 DaVe Inc. kimhauser.ch, All rights reserved.
 //
 
@@ -17,15 +17,10 @@
 #include "Widgets/Layout/Anchors.h"
 #include "Blueprint/UserWidget.h"
 #include "WeaponSystem/Crosshair/CrosshairUserWidgetBase.h"
-#include "CrossCrosshairUserWidget.generated.h"
-
-/**
- * 
- */
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCrosshairAnimationDelegate, bool, AlternativeAnimation);
+#include "ChevronsCrosshairUserWidget.generated.h"
 
 UCLASS()
-class WEAPONSYSTEM_API UCrossCrosshairUserWidget : public UCrosshairUserWidgetBase
+class WEAPONSYSTEM_API UChevronsCrosshairUserWidget : public UCrosshairUserWidgetBase
 {
 	GENERATED_BODY()
     
@@ -37,10 +32,13 @@ protected:
     
 public:
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Chevrons Crosshair", Interp, meta = (BindWidget))
     float InitSize = 100.0f;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Chevrons Crosshair", Interp, meta = (BindWidget))
     float InnerDistance = 10.0f;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Chevrons Crosshair", Interp, meta = (BindWidget))
+    float ChevronLength = 30.0f;
     
 };
