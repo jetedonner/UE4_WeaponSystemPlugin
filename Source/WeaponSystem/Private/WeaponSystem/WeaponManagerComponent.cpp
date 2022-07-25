@@ -33,7 +33,8 @@ void UWeaponManagerComponent::BeginPlay()
         NewWeaponImpl->OnProjectileFireDelegate.AddDynamic(this, &UWeaponManagerComponent::ProjectileFired);
         
         NewWeaponImpl->OnProjectileHitDelegate.AddDynamic(this, &UWeaponManagerComponent::ProjectileHit);
-            
+        NewWeaponImpl->RegisterComponent();
+//        GetOwner()->
         WeaponsArrayImpl.AddUnique(NewWeaponImpl);
     }
     this->SetCurrentWeapon(1, false);
