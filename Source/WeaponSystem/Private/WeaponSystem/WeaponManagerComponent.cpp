@@ -95,7 +95,8 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
                 
                 CurrentWeapon = Weapon;
                 
-                if(CurrentWeapon)
+                AWeaponSystemCharacterBase* MyOwner = Cast<AWeaponSystemCharacterBase>(this->GetOwner());
+                if(CurrentWeapon && MyOwner && MyOwner->IsPlayerControlled())
                 {
                     // Get the widget class
                     
@@ -109,17 +110,11 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
                     
                     TSubclassOf<class UUserWidget> CSWidgetClass = CurrentWeapon->WeaponDefinition()->CrosshairUserWidget;
 
-                    // ... then to display you widget do
-
-                    // Check if class was found
                         if(CSWidgetClass)
                         {
                             UDbg::DbgMsg(FString::Printf(TEXT("HAS New CS Widget")), 5.0f, FColor::Green);
-                            // Create the widget
-//                            UUserWidget* CSWidget = CreateWidget<UUserWidget>(GetWorld(), CSWidgetClass, FName(TEXT("CSWidget")));
                             
-                            CurrentCSWidget = CreateWidget<UUserWidget>(GetWorld(), CSWidgetClass, FName(TEXT("CSWidget")));
-//                            // Check if widget was created
+                            CurrentCSWidget = CreateWidget<UUserWidget>(GetWorld(), CSWidgetClass/*, FName(TEXT("CSWidget"))*/);
                             if (CurrentCSWidget)
                             {
                                 UDbg::DbgMsg(FString::Printf(TEXT("Adding Current CS Widget")), 5.0f, FColor::Green);
