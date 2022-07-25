@@ -16,6 +16,7 @@
 #include "Math/Vector2D.h"
 #include "Widgets/Layout/Anchors.h"
 #include "Blueprint/UserWidget.h"
+#include "WeaponSystem/Crosshair/CrosshairUserWidgetBase.h"
 #include "CircleCrosshairUserWidget.generated.h"
 
 /**
@@ -24,7 +25,7 @@
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCrosshairAnimationDelegate, bool, AlternativeAnimation);
 
 UCLASS()
-class WEAPONSYSTEM_API UCircleCrosshairUserWidget : public UUserWidget
+class WEAPONSYSTEM_API UCircleCrosshairUserWidget : public UCrosshairUserWidgetBase
 {
 	GENERATED_BODY()
     
@@ -42,26 +43,26 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
     int NumSegments = 60;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
-    FLinearColor Tint = FLinearColor::Yellow;
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
+//    FLinearColor Tint = FLinearColor::Yellow;
+//    
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
+//    bool bAntiAlias = true;
+//    
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
+//    float Thickness = 30.0f;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
-    bool bAntiAlias = true;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Circle Crosshair", Interp, meta = (BindWidget))
-    float Thickness = 30.0f;
-    
-    UWidgetAnimation* GetAnimationByName(FName AnimationName) const;
-
-    bool PlayAnimationByName(FName AnimationName,
-        float StartAtTime,
-        int32 NumLoopsToPlay,
-        EUMGSequencePlayMode::Type PlayMode,
-        float PlaybackSpeed);
-
-protected:
-    TMap<FName, UWidgetAnimation*> AnimationsMap;
-
-    void FillAnimationsMap();
+//    UWidgetAnimation* GetAnimationByName(FName AnimationName) const;
+//
+//    bool PlayAnimationByName(FName AnimationName,
+//        float StartAtTime,
+//        int32 NumLoopsToPlay,
+//        EUMGSequencePlayMode::Type PlayMode,
+//        float PlaybackSpeed);
+//
+//protected:
+//    TMap<FName, UWidgetAnimation*> AnimationsMap;
+//
+//    void FillAnimationsMap();
     
 };
