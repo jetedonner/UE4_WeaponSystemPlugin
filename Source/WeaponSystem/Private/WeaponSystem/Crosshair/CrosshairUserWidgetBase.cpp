@@ -100,3 +100,8 @@ void UCrosshairUserWidgetBase::PlayAimedAtAnimation(bool AlternativeAnimation)
     EUMGSequencePlayMode::Type PlayMode = (AlternativeAnimation ? EUMGSequencePlayMode::Forward : EUMGSequencePlayMode::Reverse);
     PlayAnimationByName(AimedAnimationName, 0.0f, 1, PlayMode, 1.0f);
 }
+
+void UCrosshairUserWidgetBase::DrawLine(FPaintContext Context, FVector2D PositionA, FVector2D PositionB) const
+{
+    UWidgetBlueprintLibrary::DrawLine(Context, PositionA, PositionB, Tint, bAntiAlias, Thickness);
+}

@@ -40,26 +40,19 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
     float InitSize = 100.0f;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
-    FLinearColor Tint = FLinearColor::Red;
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
+//    FLinearColor Tint = FLinearColor::Red;
+//    
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
+//    bool bAntiAlias = true;
+//    
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
+//    float Thickness = 3.0f;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
-    bool bAntiAlias = true;
+    float InnerDistance = 10.0f;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
-    float Thickness = 3.0f;
-    
-//    UWidgetAnimation* GetAnimationByName(FName AnimationName) const;
-//
-//    bool PlayAnimationByName(FName AnimationName,
-//        float StartAtTime,
-//        int32 NumLoopsToPlay,
-//        EUMGSequencePlayMode::Type PlayMode,
-//        float PlaybackSpeed);
-//
-//protected:
-//    TMap<FName, UWidgetAnimation*> AnimationsMap;
-//
-//    void FillAnimationsMap();
+//    UFUNCTION(BlueprintCallable, Category="Cross Crosshair")
+//    void DrawLine(FPaintContext Context, FVector2D PositionA, FVector2D PositionB) const;
     
 };
