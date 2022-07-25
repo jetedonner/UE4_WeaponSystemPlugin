@@ -81,6 +81,9 @@ public:
     bool IsAimedAtChar = false;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    bool IsAimedAtPickup = false;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     class USoundCue* DieSound;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")

@@ -70,9 +70,24 @@ void UWeaponComponentBase::OnStoppedShooting_Implementation(EWeaponFunction Weap
     //ExecFireShot(WeaponFunction);
 }
 
+//FRotator MuzzleRotation
+
+void UWeaponComponentBase::GetMuzzleRotationInt(FRotator& MuzzleRotationRet)
+{
+    FVector  CameraLoc;
+    FRotator CameraRot;
+    
+    AActor* ActorRef = GetWorld()->GetFirstPlayerController()->GetPawn();
+    
+    AWeaponSystemCharacterBase* WSActor = Cast<AWeaponSystemCharacterBase>(ActorRef);
+    
+    ActorRef->GetActorEyesViewPoint(CameraLoc, CameraRot);
+    MuzzleRotationRet = CameraRot;
+//    return CameraRot;
+}
+
 void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
 {
-
     UE_LOG(LogSuake3D, Warning, TEXT("UWeaponComponentBase::FireShot() !!!!!!!"));
     
     FVector  CameraLoc;
@@ -94,7 +109,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
         CameraLoc += WSActor->FirstPersonCamera->GetForwardVector() * 205.0f;
     }
     
-    FRotator MuzzleRotation = CameraRot;
+    FRotator MuzzleRotationRetNG = CameraRot;//MuzzleRotation;//CameraRot;
     
     FVector MuzzleOffset;
     MuzzleOffset.Set(0.0f, 0.0f, 0.0f);
@@ -159,7 +174,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
 //        UE_LOG(LogSuake3D, Warning, TEXT("Projectile box: %s"), *boxExtent.ToString());
 //        GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("Projectile box: %s"), *boxExtent.ToString()));
         
-        FVector LaunchDirection = MuzzleRotation.Vector();
+        FVector LaunchDirection = MuzzleRotationRetNG.Vector();
         SpawnedRef->OnProjectileHitDelegate.AddDynamic(this, &UWeaponComponentBase::ProjectileHit);
         bool WasHandled = false;
         SpawnedRef->FireInDirection(LaunchDirection, WasHandled);

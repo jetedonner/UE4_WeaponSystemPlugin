@@ -40,8 +40,15 @@ public:
 protected:
 
 	virtual void BeginPlay() override;
+    
+    // Internal Functions
+    void GetMuzzleRotationInt(FRotator& MuzzleRotation);
+    
+//    FVec GetMuzzleRotation();
 
 public:
+    
+    
     
     FTimerHandle ReloadingEndTimerHandle;
     FTimerHandle ReloadingStartTimerHandle;
@@ -60,6 +67,22 @@ public:
             FinishReloading();
         }
     }
+    
+//    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
+//    void GetMuzzleRotation(FRotator MuzzleRotation);
+//
+//    UPROPERTY(BlueprintGetter=GetMuzzleRotation, Category="Weapon System")
+//    FRotator MuzzleRotation { return AmmoCount % WeaponDefinition()->ClipSize; };
+    
+    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
+    FRotator GetMuzzleRotation() {
+        FRotator MuzzleRotationRet;
+        GetMuzzleRotationInt(MuzzleRotationRet);
+        return MuzzleRotationRet;
+    }
+    
+    UPROPERTY(BlueprintGetter=GetMuzzleRotation, Category="Weapon System")
+    FRotator MuzzleRotation;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     class UAudioComponent* ShotAudioComponent;

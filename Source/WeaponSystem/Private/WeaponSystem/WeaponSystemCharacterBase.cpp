@@ -162,6 +162,36 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
                            CurrentCSWidget->PlayAimedAtAnimation(false);
                        }
                    }
+                   
+                   if(IsAimedAtTarget)
+                   {
+                       return;
+                   }
+                   
+                   AWeaponPickupActorBase* pick = Cast<AWeaponPickupActorBase>(HitActor);
+                   if (pick && !IsAimedAtPickup)
+                   {
+                       IsAimedAtPickup = true;
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a thing! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
+                       if(CurrentCSWidget)
+                       {
+//                           CurrentCSWidget->OnAnimateCrosshair(true);
+                           CurrentCSWidget->PlayAimedAtAnimation(true);
+                       }
+//#include "Blueprint/WidgetBlueprintLibrary.h"
+                   }
+                   else if(!pick && IsAimedAtPickup)
+                   {
+                       IsAimedAtPickup = false;
+                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
+                       if(CurrentCSWidget)
+                       {
+//                           CurrentCSWidget->OnAnimateCrosshair(false);
+                           CurrentCSWidget->PlayAimedAtAnimation(false);
+                       }
+                   }
+                   
                }
            }
         }
