@@ -28,7 +28,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponStoppedShootingDelegate, UWea
 //    Secondary               UMETA(DisplayName = "Secondary weapon function"),
 //};
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Game, defaultconfig)
 class WEAPONSYSTEM_API UWeaponComponentBase : public UActorComponent
 {
 	GENERATED_BODY()
@@ -36,6 +36,12 @@ class WEAPONSYSTEM_API UWeaponComponentBase : public UActorComponent
 public:
     
 	UWeaponComponentBase();
+    
+    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float ExampleVariable;
+    
+    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float ExampleVar;
 
 protected:
 
@@ -52,6 +58,9 @@ public:
     
     FTimerHandle ReloadingEndTimerHandle;
     FTimerHandle ReloadingStartTimerHandle;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float ExampleTest;
     
     UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
     void SetIsReloading(const bool NewVal)
