@@ -20,10 +20,10 @@ void UWeaponComponentBase::BeginPlay()
 }
 
 // Called every frame
-void UWeaponComponentBase::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-}
+//void UWeaponComponentBase::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+//{
+//	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+//}
 
 int32 UWeaponComponentBase::WeaponID()
 {
@@ -47,7 +47,7 @@ void UWeaponComponentBase::GetWeaponDefinition(FWeaponDefinition& WeaponDef)
 
 void UWeaponComponentBase::FireShot(EWeaponFunction WeaponFunction)
 {
-    
+    this->CurrentWeaponFunction = WeaponFunction;
     bool Handled = false;
     this->OnStartedShooting(WeaponFunction, Handled);
     if(!Handled)
@@ -61,6 +61,13 @@ void UWeaponComponentBase::OnStartedShooting_Implementation(EWeaponFunction Weap
     
     UDbg::DbgMsg(FString::Printf(TEXT("UWeaponComponentBase::OnStartedShooting_Implementation")), 5.0f, FColor::Purple);
     ExecFireShot(WeaponFunction);
+}
+
+void UWeaponComponentBase::OnStoppedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled){
+    Handled = true;
+    
+    UDbg::DbgMsg(FString::Printf(TEXT("UWeaponComponentBase::OnStoppedShooting_Implementation")), 5.0f, FColor::Red);
+    //ExecFireShot(WeaponFunction);
 }
 
 void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
@@ -104,7 +111,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     
     if(WeaponFunction == EWeaponFunction::Secondary)
     {
-        
+        return;
         
 //        AWeaponSystemProjectileBase* SpawnedRefSecLoc = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocation, CameraRot, SpawnParams);
         if(!ProjectileSecondary)

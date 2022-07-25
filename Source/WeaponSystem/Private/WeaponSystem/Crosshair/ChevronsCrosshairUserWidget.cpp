@@ -43,16 +43,9 @@ int32 UChevronsCrosshairUserWidget::NativePaint(const FPaintArgs& Args, const FG
     DrawLine(Context, FVector2D(CenterPosition.X, CenterPosition.Y + InnerDistance), FVector2D(CenterPosition.X + ChevronLength, CenterPosition.Y + InnerDistance + ChevronLength));
     // Down to Left
     DrawLine(Context, FVector2D(CenterPosition.X, CenterPosition.Y + InnerDistance), FVector2D(CenterPosition.X - ChevronLength, CenterPosition.Y + InnerDistance + ChevronLength));
-    
-//    DrawLine(Context, FVector2D(CenterPosition.X - InnerDistance, CenterPosition.Y), FVector2D(CenterPosition.X - InitSize / 2, CenterPosition.Y));
-//    DrawLine(Context, FVector2D(CenterPosition.X, CenterPosition.Y + InnerDistance), FVector2D(CenterPosition.X, CenterPosition.Y + InitSize / 2));
-//    DrawLine(Context, FVector2D(CenterPosition.X, CenterPosition.Y - InnerDistance), FVector2D(CenterPosition.X, CenterPosition.Y - InitSize / 2));
-
-    
-//    DrawLine(Context, FVector2D(CenterPosition.X, CenterPosition.Y - InnerDistance), FVector2D(CenterPosition.X, CenterPosition.Y - InitSize / 2));
-    
+        
+    // Draw X in the middle
     DrawLine(Context, FVector2D(CenterPosition.X + 1, CenterPosition.Y + 1), FVector2D(CenterPosition.X - 1, CenterPosition.Y - 1));
-    
     DrawLine(Context, FVector2D(CenterPosition.X - 1, CenterPosition.Y + 1), FVector2D(CenterPosition.X + 1, CenterPosition.Y - 1));
    
     return LayerId;

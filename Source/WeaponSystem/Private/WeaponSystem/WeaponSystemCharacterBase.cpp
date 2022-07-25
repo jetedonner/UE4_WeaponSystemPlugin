@@ -227,7 +227,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBP_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
             UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) STARTED ..."));
-//            UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY!!!")), 5.0f, FColor::Yellow);
+            UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StartShooting(EWeaponFunction::Secondary);
 //            ActivateWeapon(PrimaryShootKey, WeaponDefinition->WeaponID);
         });
@@ -239,7 +239,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBR_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
             UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) ENDED ..."));
-//            UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED SECONDARY!!!")), 5.0f, FColor::Yellow);
+            UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StopShooting();
 //            Delegate.ExecuteIfBound(Key, false);
         });

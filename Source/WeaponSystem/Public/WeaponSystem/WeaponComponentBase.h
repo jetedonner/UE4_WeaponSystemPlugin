@@ -91,7 +91,7 @@ public:
     UPROPERTY(BlueprintGetter=GetClipAmmoCount, Category="Weapon System")
     int32 ClipAmmoCount;
 	
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+//	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
     
     UFUNCTION(BlueprintCallable, Category="Weapon System")
     void GetWeaponID(int32& WeaponID);
@@ -133,8 +133,16 @@ public:
 //    UPROPERTY(BlueprintAssignable, Category="Weapon System")
 //    FWeaponStartedShootingDelegate OnWeaponStartedShootingDelegate;
     
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    EWeaponFunction CurrentWeaponFunction;
+    
     UFUNCTION(BlueprintNativeEvent, Category="Weapon System")
     void OnStartedShooting(EWeaponFunction WeaponFunction, bool& Handled);
 
     void OnStartedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled);
+    
+    UFUNCTION(BlueprintNativeEvent, Category="Weapon System")
+    void OnStoppedShooting(EWeaponFunction WeaponFunction, bool& Handled);
+
+    void OnStoppedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled);
 };

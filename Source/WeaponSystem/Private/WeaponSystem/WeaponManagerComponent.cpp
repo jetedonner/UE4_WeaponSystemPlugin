@@ -14,7 +14,7 @@ DEFINE_LOG_CATEGORY(LogSuake3D);
 // Sets default values for this component's properties
 UWeaponManagerComponent::UWeaponManagerComponent()
 {
-    //	PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.bCanEverTick = true;
     if(WeaponTypeTable)
     {
         WeaponTypeTable->RowStruct = FWeaponDefinition::StaticStruct();
@@ -221,6 +221,13 @@ void UWeaponManagerComponent::StopShooting()
     }
     
     CurrentWeapon->OnWeaponStoppedShootingDelegate.Broadcast(CurrentWeapon);
+    
+    bool Handled = false;
+    CurrentWeapon->OnStoppedShooting(CurrentWeapon->CurrentWeaponFunction, Handled);
+    if(!Handled)
+    {
+        
+    }
 }
 
 void UWeaponManagerComponent::StartReloading()
