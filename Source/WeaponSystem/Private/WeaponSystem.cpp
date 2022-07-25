@@ -9,6 +9,7 @@
 #include "WeaponSystem.h"
 
 #define LOCTEXT_NAMESPACE "FWeaponSystemModule"
+DEFINE_LOG_CATEGORY(LogSuake3D);
 
 void FWeaponSystemModule::StartupModule()
 {

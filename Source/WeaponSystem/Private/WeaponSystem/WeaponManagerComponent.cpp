@@ -9,9 +9,8 @@
 
 #include "WeaponSystem/WeaponManagerComponent.h"
 
-DEFINE_LOG_CATEGORY(LogSuake3D);
+//DEFINE_LOG_CATEGORY(LogSuake3D);
 
-// Sets default values for this component's properties
 UWeaponManagerComponent::UWeaponManagerComponent()
 {
     PrimaryComponentTick.bCanEverTick = true;
@@ -21,7 +20,6 @@ UWeaponManagerComponent::UWeaponManagerComponent()
     }
 }
 
-// Called when the game starts
 void UWeaponManagerComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -38,7 +36,6 @@ void UWeaponManagerComponent::BeginPlay()
             
         WeaponsArrayImpl.AddUnique(NewWeaponImpl);
     }
-    
     this->SetCurrentWeapon(1, false);
 }
 

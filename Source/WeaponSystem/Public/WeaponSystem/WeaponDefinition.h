@@ -54,9 +54,6 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     FKey ActivationKey;
     
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    class USoundCue* ShootingSound;
-    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     class USoundCue* MagEmptySound;
     
@@ -68,9 +65,6 @@ public:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     UTexture2D* HUDIcon;
-    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    TArray<FWeaponFunctionDefinition> WeaponFunctionDefinitions;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     FWeaponFunctionDefinition PrimaryWeaponFunctionDefinition;

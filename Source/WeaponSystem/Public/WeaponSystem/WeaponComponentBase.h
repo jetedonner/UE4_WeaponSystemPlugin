@@ -145,4 +145,7 @@ public:
     void OnStoppedShooting(EWeaponFunction WeaponFunction, bool& Handled);
 
     void OnStoppedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled);
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    bool TesetVarForTeset = true;
 };
