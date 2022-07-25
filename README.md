@@ -53,4 +53,6 @@ What I manly did for this project was consolidating the most important stuff tha
 - Websites / Email
     - <http://kimhauser.ch>
     - <http://job.kimhauser.ch>
+    - <http://suake3d.kimhauser.ch>
+    - <http://ivaccination.kimhauser.ch>
     - <kim@kimhauser.ch>
