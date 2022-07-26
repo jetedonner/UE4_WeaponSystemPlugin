@@ -58,6 +58,11 @@ void UWeaponManagerComponent::PickupWeapon(int32 PickedupWeaponID, int32 AmmoCou
             (*DaWeapon)->AmmoCount += AmmoCount;
         }
         
+        if(CurrentWeapon->WeaponID() != PickedupWeaponID && IsShooting)
+        {
+            StopShooting();
+        }
+        
         SetCurrentWeapon(PickedupWeaponID, false);
     }
     

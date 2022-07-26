@@ -140,7 +140,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     {
 //        WSActor->FirstPersonCamera;
         CameraLoc = WSActor->FirstPersonCamera->GetComponentLocation();
-        CameraLoc += WSActor->FirstPersonCamera->GetForwardVector() * 205.0f;
+        CameraLoc += WSActor->FirstPersonCamera->GetForwardVector() * 25.0f;
     }
     
     FRotator MuzzleRotationRetNG = CameraRot;//MuzzleRotation;//CameraRot;
