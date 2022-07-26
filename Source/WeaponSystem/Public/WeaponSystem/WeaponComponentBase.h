@@ -28,7 +28,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponStoppedShootingDelegate, UWea
 //    Secondary               UMETA(DisplayName = "Secondary weapon function"),
 //};
 
-UCLASS(Blueprintable, Config=Game, defaultconfig)
+UCLASS(Blueprintable, config=Game, defaultconfig)
 class WEAPONSYSTEM_API UWeaponComponentBase : public UActorComponent
 {
 	GENERATED_BODY()
@@ -39,11 +39,11 @@ public:
 
     UWeaponComponentBase(const FObjectInitializer& ObjectInitializer);
     
-    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float ExampleVariable;
-    
-    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float ExampleVar;
+//    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    float ExampleVariable;
+//
+//    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    float ExampleVar;
 
 protected:
 
@@ -60,18 +60,18 @@ public:
     FTimerHandle ReloadingEndTimerHandle;
     FTimerHandle ReloadingStartTimerHandle;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float ExampleTestNG;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float KimsVar = 123.0f;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float JeteSCHOICEReload = 123.0f;
-    
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float ANOTHERTestVar = 123.0f;
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    float ExampleTestNG;
+//
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    float KimsVar = 123.0f;
+//
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    float JeteSCHOICEReload = 123.0f;
+//
+//
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    float ANOTHERTestVar = 123.0f;
     
     UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
     void SetIsReloading(const bool NewVal)

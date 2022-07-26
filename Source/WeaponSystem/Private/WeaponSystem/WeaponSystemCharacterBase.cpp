@@ -80,6 +80,8 @@ void AWeaponSystemCharacterBase::BeginPlay()
 void AWeaponSystemCharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+    return;
     
     if(!IsPlayerControlled())
     {
@@ -89,15 +91,14 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
     if (GetWorld())
     {
         APlayerCameraManager* CameraManager = Cast<APlayerCameraManager>(UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0));
-        if (CameraManager )
+        if (CameraManager)
         {
            FHitResult hitResult;
            FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
            FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
-//           DrawDebugLine(GetWorld(), Start, End, FColor(255, 0, 0), false, -1, 0, 5.0);
 
            bool isHit = GetWorld()->LineTraceSingleByChannel(hitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
-
+            
            if (isHit)
            {
                AActor* HitActor = hitResult.GetActor();
@@ -107,15 +108,12 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
                    if (pChar && !IsAimedAtChar)
                    {
                        IsAimedAtChar = true;
-//                       IsAimedAtTarget = true;
                        UE_LOG(LogSuake3D, Warning, TEXT("I hit a Character! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
                        if(CurrentCSWidget)
                        {
-                           //CurrentCSWidget->OnAnimateCrosshair(true);
                            CurrentCSWidget->PlayAimedAtAnimation(true);
                        }
-//#include "Blueprint/WidgetBlueprintLibrary.h"
                    }
                    else if(!pChar && IsAimedAtChar)
                    {
@@ -322,7 +320,13 @@ void AWeaponSystemCharacterBase::ActivateWeapon(FKey Param, int32 WeaponID)
     else
     {
 //        UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase::ActivateWeapon: %i ..."), WeaponID);
-        WeaponManagerComponent->SetCurrentWeapon(WeaponID);
+        if(WeaponManagerComponent->CurrentWeapon->WeaponID() != WeaponID)
+        {
+            IsAimedAtChar = false;
+            IsAimedAtTarget = false;
+            IsAimedAtPickup = false;
+            WeaponManagerComponent->SetCurrentWeapon(WeaponID);
+        }
     }
 }
 

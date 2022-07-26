@@ -14,14 +14,13 @@
 #include "Kismet/GameplayStatics.h"
 #include "WeaponDefinition.h"
 #include "WeaponComponentBase.h"
+#include "WeaponPickups/WeaponPickupActorBase.h"
 #include "Utils/GlobalDefinitions.h"
 #include "Utils/UtilityTimer.h"
 #include "Blueprint/UserWidget.h"
 #include "WeaponManagerComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponReloadingDelegate, UWeaponComponentBase*, WeaponActorComponent);
-
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponStoppedShootingDelegate, UWeaponComponentBase*, WeaponActorComponent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class WEAPONSYSTEM_API UWeaponManagerComponent : public USceneComponent
@@ -52,6 +51,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System", meta=(RequiredAssetDataTags="RowStructure=WeaponDefinition"))
     class UDataTable* WeaponTypeTable;
 	
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    bool IsAimedAtTarget = false;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    bool IsAimedAtChar = false;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    bool IsAimedAtPickup = false;
     
 //    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly)
 //    bool GetIsReloading() { return (CurrentWeapon != nullptr ? CurrentWeapon->IsReloading : false ); }

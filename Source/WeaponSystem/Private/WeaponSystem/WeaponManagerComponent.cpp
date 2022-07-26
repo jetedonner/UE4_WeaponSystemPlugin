@@ -42,6 +42,106 @@ void UWeaponManagerComponent::BeginPlay()
 void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+    
+    APawn* MyOwner = Cast<APawn>(GetOwner());
+    if(!MyOwner->IsPlayerControlled())
+    {
+        return;
+    }
+    
+//    if (GetWorld())
+//    {
+        APlayerCameraManager* CameraManager = Cast<APlayerCameraManager>(UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0));
+        if (CameraManager)
+        {
+           FHitResult hitResult;
+           FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
+           FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
+
+           bool isHit = GetWorld()->LineTraceSingleByChannel(hitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+            
+           if (isHit)
+           {
+               AActor* HitActor = hitResult.GetActor();
+               if (HitActor)
+               {
+                   AWeaponSystemCharacterBase* pChar = Cast<AWeaponSystemCharacterBase>(HitActor);
+                   if (pChar && !IsAimedAtChar)
+                   {
+                       IsAimedAtChar = true;
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Character! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
+                       if(CurrentCSWidgetNew)
+                       {
+                           CurrentCSWidgetNew->PlayAimedAtAnimation(true);
+                       }
+                   }
+                   else if(!pChar && IsAimedAtChar)
+                   {
+                       IsAimedAtChar = false;
+                       UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
+                       if(CurrentCSWidgetNew)
+                       {
+                           CurrentCSWidgetNew->PlayAimedAtAnimation(false);
+                       }
+                   }
+                   
+                   if(IsAimedAtChar)
+                   {
+                       return;
+                   }
+                   
+                   AHitableActorBase* p = Cast<AHitableActorBase>(HitActor);
+                   if (p && !IsAimedAtTarget)
+                   {
+                       IsAimedAtTarget = true;
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Hitable! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
+                       if(CurrentCSWidgetNew)
+                       {
+                           CurrentCSWidgetNew->PlayAimedAtAnimation(true);
+                       }
+                   }
+                   else if(!p && IsAimedAtTarget)
+                   {
+                       IsAimedAtTarget = false;
+                       UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
+                       if(CurrentCSWidgetNew)
+                       {
+                           CurrentCSWidgetNew->PlayAimedAtAnimation(false);
+                       }
+                   }
+                   
+                   if(IsAimedAtTarget)
+                   {
+                       return;
+                   }
+                   
+                   AWeaponPickupActorBase* pick = Cast<AWeaponPickupActorBase>(HitActor);
+                   if (pick && !IsAimedAtPickup)
+                   {
+                       IsAimedAtPickup = true;
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Pickup! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
+                       if(CurrentCSWidgetNew)
+                       {
+                           CurrentCSWidgetNew->PlayAimedAtAnimation(true);
+                       }
+                   }
+                   else if(!pick && IsAimedAtPickup)
+                   {
+                       IsAimedAtPickup = false;
+                       UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
+                       if(CurrentCSWidgetNew)
+                       {
+                           CurrentCSWidgetNew->PlayAimedAtAnimation(false);
+                       }
+                   }
+                   
+               }
+           }
+        }
+//    }
 }
 
 void UWeaponManagerComponent::GetCurrentWeaponFunctionDefinitionInt(FWeaponFunctionDefinition& WeaponFunctionDefinition)
