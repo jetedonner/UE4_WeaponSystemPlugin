@@ -49,8 +49,7 @@ protected:
 
 	virtual void BeginPlay() override;
     
-    // Internal Functions
-    void GetMuzzleRotationInt(FRotator& MuzzleRotation);
+    
     
 //    FVec GetMuzzleRotation();
 
@@ -68,7 +67,11 @@ public:
     float KimsVar = 123.0f;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float VarHOTRELOAD = 123.0f;
+    float JeteSCHOICEReload = 123.0f;
+    
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float ANOTHERTestVar = 123.0f;
     
     UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
     void SetIsReloading(const bool NewVal)
@@ -85,21 +88,30 @@ public:
         }
     }
     
-//    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
-//    void GetMuzzleRotation(FRotator MuzzleRotation);
-//
-//    UPROPERTY(BlueprintGetter=GetMuzzleRotation, Category="Weapon System")
-//    FRotator MuzzleRotation { return AmmoCount % WeaponDefinition()->ClipSize; };
+    // Internal Functions
+    void GetMuzzleRotationInt(FRotator& MuzzleRotation, FVector& MuzzleLocRet);
     
     UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
     FRotator GetMuzzleRotation() {
         FRotator MuzzleRotationRet;
-        GetMuzzleRotationInt(MuzzleRotationRet);
+        FVector MuzzleLocRet;
+        GetMuzzleRotationInt(MuzzleRotationRet, MuzzleLocRet);
         return MuzzleRotationRet;
+    }
+    
+    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
+    FVector GetMuzzleLocation() {
+        FRotator MuzzleRotationRet;
+        FVector MuzzleLocRet;
+        GetMuzzleRotationInt(MuzzleRotationRet, MuzzleLocRet);
+        return MuzzleLocRet;
     }
     
     UPROPERTY(BlueprintGetter=GetMuzzleRotation, Category="Weapon System")
     FRotator MuzzleRotation;
+    
+    UPROPERTY(BlueprintGetter=GetMuzzleLocation, Category="Weapon System")
+    FVector MuzzleLocation;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     class UAudioComponent* ShotAudioComponent;

@@ -90,7 +90,7 @@ void UWeaponComponentBase::OnStoppedShooting_Implementation(EWeaponFunction Weap
 
 //FRotator MuzzleRotation
 
-void UWeaponComponentBase::GetMuzzleRotationInt(FRotator& MuzzleRotationRet)
+void UWeaponComponentBase::GetMuzzleRotationInt(FRotator& MuzzleRotationRet, FVector& MuzzleLocRet)
 {
     FVector  CameraLoc;
     FRotator CameraRot;
@@ -100,7 +100,23 @@ void UWeaponComponentBase::GetMuzzleRotationInt(FRotator& MuzzleRotationRet)
     AWeaponSystemCharacterBase* WSActor = Cast<AWeaponSystemCharacterBase>(ActorRef);
     
     ActorRef->GetActorEyesViewPoint(CameraLoc, CameraRot);
+    
+    CameraLoc = ActorRef->GetActorLocation();
+//    CameraRot = ActorRef->GetActorRotation();
+    
+    if(WSActor)
+    {
+//        WSActor->FirstPersonCamera;
+        CameraLoc = WSActor->FirstPersonCamera->GetComponentLocation();
+        CameraLoc += WSActor->FirstPersonCamera->GetForwardVector() * 205.0f;
+    }
+    
+    FVector MuzzleOffset;
+    MuzzleOffset.Set(0.0f, 0.0f, 0.0f);
+    MuzzleLocRet = CameraLoc + FTransform(CameraRot).TransformVector(MuzzleOffset);
+    
     MuzzleRotationRet = CameraRot;
+//    MuzzleLocRet = CameraLoc;
 //    return CameraRot;
 }
 
@@ -131,7 +147,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     
     FVector MuzzleOffset;
     MuzzleOffset.Set(0.0f, 0.0f, 0.0f);
-    FVector MuzzleLocation = CameraLoc + FTransform(CameraRot).TransformVector(MuzzleOffset);
+    FVector MuzzleLocationRetNG = CameraLoc + FTransform(CameraRot).TransformVector(MuzzleOffset);
     
     FActorSpawnParameters SpawnParams;
     SpawnParams.Owner = ActorRef;
@@ -152,7 +168,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
             return;
         }
         
-        this->SpawnedRefSec = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocation, CameraRot, SpawnParams);
+        this->SpawnedRefSec = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocationRetNG, CameraRot, SpawnParams);
         
         if(!SpawnedRefSec->AutomaticRecharge)
         {
@@ -173,7 +189,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
         return;
     }
     
-    AWeaponSystemProjectileBase* SpawnedRef = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(Projectile, MuzzleLocation, CameraRot, SpawnParams);
+    AWeaponSystemProjectileBase* SpawnedRef = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(Projectile, MuzzleLocationRetNG, CameraRot, SpawnParams);
     
     if(SpawnedRef == NULL)
     {
