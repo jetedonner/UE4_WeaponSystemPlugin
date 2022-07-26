@@ -11,7 +11,6 @@
 void UMovingScoreWidgetBase::NativeConstruct()
 {
     Super::NativeConstruct();
-//    this->SetCollisionEnabled(NoCollision);
 }
 
 void UMovingScoreWidgetBase::PlayMoveAndFadeAnim()

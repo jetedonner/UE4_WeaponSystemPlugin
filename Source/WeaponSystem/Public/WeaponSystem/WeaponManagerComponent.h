@@ -63,8 +63,11 @@ public:
     UFUNCTION(BlueprintCallable, Category="Weapon System")
     void IsAimedAtInt(bool& IsAimedAtTarget)
     {
-        IsAimedAtTarget = (IsAimedAtHitable || IsAimedAtChar || IsAimedAtPickup);
+        IsAimedAtTarget = isHit;//(IsAimedAtHitable || IsAimedAtChar || IsAimedAtPickup);
     }
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    bool isHit = false;
     
     UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
     bool IsAimedAt() {
@@ -134,24 +137,6 @@ public:
         GetCurrentWeaponFunctionDefinitionInt(WeaponFunctionDefinitionRet);
         return WeaponFunctionDefinitionRet;
     }
-    
-//
-//    UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
-//    void GetCurrentWeaponFunctionDefinition()
-//    {
-//        if(!IsReloading && NewVal)
-//        {
-//            IsReloading = NewVal;
-//            StartReloading();
-//        }
-//        else if(IsReloading && !NewVal)
-//        {
-//            IsReloading = NewVal;
-//            FinishReloading();
-//        }
-//    }
-    
-   
     
     void SetCurrentWeapon(int32 WeaponID, bool PlayAudio = true);
     

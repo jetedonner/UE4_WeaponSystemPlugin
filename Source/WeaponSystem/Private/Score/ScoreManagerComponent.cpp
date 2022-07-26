@@ -33,11 +33,11 @@ void UScoreManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 void UScoreManagerComponent::AddScore(float Value, float& NewScore)
 {
-    UE_LOG(LogSuake3D, Log, TEXT("UScoreManagerComponent::AddScore: Score %f"), Score);
-    UE_LOG(LogSuake3D, Log, TEXT("UScoreManagerComponent::AddScore: %f"), Value);
+//    UE_LOG(LogSuake3D, Log, TEXT("UScoreManagerComponent::AddScore: Score %f"), Score);
+//    UE_LOG(LogSuake3D, Log, TEXT("UScoreManagerComponent::AddScore: %f"), Value);
     Score += Value;
     NewScore = Score;
-    UE_LOG(LogSuake3D, Log, TEXT("UScoreManagerComponent::AddScore: NewScore: %f"), NewScore);
+//    UE_LOG(LogSuake3D, Log, TEXT("UScoreManagerComponent::AddScore: NewScore: %f"), NewScore);
 }
 
 void UScoreManagerComponent::ResetScore()

@@ -58,7 +58,7 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
            FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
            FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
 
-           bool isHit = GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+           isHit = GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
             
            if (isHit)
            {
