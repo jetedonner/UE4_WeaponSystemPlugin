@@ -106,8 +106,8 @@ public:
     UFUNCTION()
     void OnReceivedAnyDamage(float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
     
-    UFUNCTION()
-    void OnTakeAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+    UFUNCTION(BlueprintCallable, Category="Weapon System")
+    void OnTakeAnyDamageNG(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
     
     UFUNCTION(BlueprintNativeEvent, Category="Event|Hit")
     void OnActorGotHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);

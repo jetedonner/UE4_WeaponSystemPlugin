@@ -79,7 +79,7 @@ void AWeaponSystemCharacterBase::BeginPlay()
 	Super::BeginPlay();
     
 //    this->OnActorHit.AddDynamic(this, &AWeaponSystemCharacterBase::OnActorGotHit);
-    Cast<AActor>(this)->OnTakeAnyDamage.AddDynamic(this, &AWeaponSystemCharacterBase::OnTakeAnyDamage);
+    Cast<AActor>(this)->OnTakeAnyDamage.AddDynamic(this, &AWeaponSystemCharacterBase::OnTakeAnyDamageNG);
 }
 
 // Called every frame
@@ -403,7 +403,7 @@ void AWeaponSystemCharacterBase::OnReceivedAnyDamage(float Damage, const class U
     }
 }
 
-void AWeaponSystemCharacterBase::OnTakeAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser)
+void AWeaponSystemCharacterBase::OnTakeAnyDamageNG(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser)
 {
     if(HealthManagerComponent)
     {
