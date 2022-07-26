@@ -83,112 +83,112 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
 
     return;
     
-    if(!IsPlayerControlled())
-    {
-        return;
-    }
-    
-    if (GetWorld())
-    {
-        APlayerCameraManager* CameraManager = Cast<APlayerCameraManager>(UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0));
-        if (CameraManager)
-        {
-           FHitResult hitResult;
-           FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
-           FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
-
-           bool isHit = GetWorld()->LineTraceSingleByChannel(hitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
-            
-           if (isHit)
-           {
-               AActor* HitActor = hitResult.GetActor();
-               if (HitActor)
-               {
-                   AWeaponSystemCharacterBase* pChar = Cast<AWeaponSystemCharacterBase>(HitActor);
-                   if (pChar && !IsAimedAtChar)
-                   {
-                       IsAimedAtChar = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Character! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
-                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-                       if(CurrentCSWidget)
-                       {
-                           CurrentCSWidget->PlayAimedAtAnimation(true);
-                       }
-                   }
-                   else if(!pChar && IsAimedAtChar)
-                   {
-                       IsAimedAtChar = false;
+//    if(!IsPlayerControlled())
+//    {
+//        return;
+//    }
+//    
+//    if (GetWorld())
+//    {
+//        APlayerCameraManager* CameraManager = Cast<APlayerCameraManager>(UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0));
+//        if (CameraManager)
+//        {
+//           FHitResult hitResult;
+//           FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
+//           FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
+//
+//           bool isHit = GetWorld()->LineTraceSingleByChannel(hitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+//            
+//           if (isHit)
+//           {
+//               AActor* HitActor = hitResult.GetActor();
+//               if (HitActor)
+//               {
+//                   AWeaponSystemCharacterBase* pChar = Cast<AWeaponSystemCharacterBase>(HitActor);
+//                   if (pChar && !IsAimedAtChar)
+//                   {
+//                       IsAimedAtChar = true;
+//                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Character! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
+//                       if(CurrentCSWidget)
+//                       {
+//                           CurrentCSWidget->PlayAimedAtAnimation(true);
+//                       }
+//                   }
+//                   else if(!pChar && IsAimedAtChar)
+//                   {
+//                       IsAimedAtChar = false;
+////                       IsAimedAtTarget = false;
+//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
+//                       if(CurrentCSWidget)
+//                       {
+////                           CurrentCSWidget->OnAnimateCrosshair(false);
+//                           CurrentCSWidget->PlayAimedAtAnimation(false);
+//                       }
+//                   }
+//                   
+//                   if(IsAimedAtChar)
+//                   {
+//                       return;
+//                   }
+//                   
+//                   AHitableActorBase* p = Cast<AHitableActorBase>(HitActor);
+//                   if (p && !IsAimedAtTarget)
+//                   {
+//                       IsAimedAtTarget = true;
+//                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Hitable! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
+//                       if(CurrentCSWidget)
+//                       {
+////                           CurrentCSWidget->OnAnimateCrosshair(true);
+//                           CurrentCSWidget->PlayAimedAtAnimation(true);
+//                       }
+////#include "Blueprint/WidgetBlueprintLibrary.h"
+//                   }
+//                   else if(!p && IsAimedAtTarget)
+//                   {
 //                       IsAimedAtTarget = false;
-                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-                       if(CurrentCSWidget)
-                       {
-//                           CurrentCSWidget->OnAnimateCrosshair(false);
-                           CurrentCSWidget->PlayAimedAtAnimation(false);
-                       }
-                   }
-                   
-                   if(IsAimedAtChar)
-                   {
-                       return;
-                   }
-                   
-                   AHitableActorBase* p = Cast<AHitableActorBase>(HitActor);
-                   if (p && !IsAimedAtTarget)
-                   {
-                       IsAimedAtTarget = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Hitable! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
-                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-                       if(CurrentCSWidget)
-                       {
-//                           CurrentCSWidget->OnAnimateCrosshair(true);
-                           CurrentCSWidget->PlayAimedAtAnimation(true);
-                       }
-//#include "Blueprint/WidgetBlueprintLibrary.h"
-                   }
-                   else if(!p && IsAimedAtTarget)
-                   {
-                       IsAimedAtTarget = false;
-                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-                       if(CurrentCSWidget)
-                       {
-//                           CurrentCSWidget->OnAnimateCrosshair(false);
-                           CurrentCSWidget->PlayAimedAtAnimation(false);
-                       }
-                   }
-                   
-                   if(IsAimedAtTarget)
-                   {
-                       return;
-                   }
-                   
-                   AWeaponPickupActorBase* pick = Cast<AWeaponPickupActorBase>(HitActor);
-                   if (pick && !IsAimedAtPickup)
-                   {
-                       IsAimedAtPickup = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Pickup! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
-                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-                       if(CurrentCSWidget)
-                       {
-//                           CurrentCSWidget->OnAnimateCrosshair(true);
-                           CurrentCSWidget->PlayAimedAtAnimation(true);
-                       }
-//#include "Blueprint/WidgetBlueprintLibrary.h"
-                   }
-                   else if(!pick && IsAimedAtPickup)
-                   {
-                       IsAimedAtPickup = false;
-                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-                       if(CurrentCSWidget)
-                       {
-//                           CurrentCSWidget->OnAnimateCrosshair(false);
-                           CurrentCSWidget->PlayAimedAtAnimation(false);
-                       }
-                   }
-                   
-               }
-           }
-        }
-    }
+//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
+//                       if(CurrentCSWidget)
+//                       {
+////                           CurrentCSWidget->OnAnimateCrosshair(false);
+//                           CurrentCSWidget->PlayAimedAtAnimation(false);
+//                       }
+//                   }
+//                   
+//                   if(IsAimedAtTarget)
+//                   {
+//                       return;
+//                   }
+//                   
+//                   AWeaponPickupActorBase* pick = Cast<AWeaponPickupActorBase>(HitActor);
+//                   if (pick && !IsAimedAtPickup)
+//                   {
+//                       IsAimedAtPickup = true;
+//                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Pickup! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
+//                       if(CurrentCSWidget)
+//                       {
+////                           CurrentCSWidget->OnAnimateCrosshair(true);
+//                           CurrentCSWidget->PlayAimedAtAnimation(true);
+//                       }
+////#include "Blueprint/WidgetBlueprintLibrary.h"
+//                   }
+//                   else if(!pick && IsAimedAtPickup)
+//                   {
+//                       IsAimedAtPickup = false;
+//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
+//                       if(CurrentCSWidget)
+//                       {
+////                           CurrentCSWidget->OnAnimateCrosshair(false);
+//                           CurrentCSWidget->PlayAimedAtAnimation(false);
+//                       }
+//                   }
+//                   
+//               }
+//           }
+//        }
+//    }
     
 }
 

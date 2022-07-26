@@ -153,33 +153,34 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     if(WeaponFunction == EWeaponFunction::Secondary)
     {
         return;
-        
-//        AWeaponSystemProjectileBase* SpawnedRefSecLoc = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocation, CameraRot, SpawnParams);
-        if(!ProjectileSecondary)
-        {
-            return;
-        }
-        
-        this->SpawnedRefSec = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocationRetNG, CameraRot, SpawnParams);
-        
-        if(!SpawnedRefSec->AutomaticRecharge)
-        {
-            ReadyForNewShot = false;
-        }
-        
-        if(SpawnedRefSec->ShotSound)
-        {
-            UAudioComponent* AudioComponent = UGameplayStatics::SpawnSoundAtLocation(this, SpawnedRefSec->ShotSound, SpawnedRefSec->GetActorLocation(), FRotator::ZeroRotator, 1.0, 1.0, 0.0f, nullptr, nullptr, true);
-            ShotAudioComponent = AudioComponent;
-        }
-        
-        SpawnedRefSec->OnProjectileHitDelegate.AddDynamic(this, &UWeaponComponentBase::ProjectileHit);
-        
-        this->OnProjectileFireDelegate.Broadcast(SpawnedRefSec);
-        
-        UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY => CALL EVENT!!!")), 5.0f, FColor::Green);
-        return;
     }
+//        
+////        AWeaponSystemProjectileBase* SpawnedRefSecLoc = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocation, CameraRot, SpawnParams);
+//        if(!ProjectileSecondary)
+//        {
+//            return;
+//        }
+//        
+//        this->SpawnedRefSec = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocationRetNG, CameraRot, SpawnParams);
+//        
+//        if(!SpawnedRefSec->AutomaticRecharge)
+//        {
+//            ReadyForNewShot = false;
+//        }
+//        
+//        if(SpawnedRefSec->ShotSound)
+//        {
+//            UAudioComponent* AudioComponent = UGameplayStatics::SpawnSoundAtLocation(this, SpawnedRefSec->ShotSound, SpawnedRefSec->GetActorLocation(), FRotator::ZeroRotator, 1.0, 1.0, 0.0f, nullptr, nullptr, true);
+//            ShotAudioComponent = AudioComponent;
+//        }
+//        
+//        SpawnedRefSec->OnProjectileHitDelegate.AddDynamic(this, &UWeaponComponentBase::ProjectileHit);
+//        
+//        this->OnProjectileFireDelegate.Broadcast(SpawnedRefSec);
+//        
+//        UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY => CALL EVENT!!!")), 5.0f, FColor::Green);
+//        return;
+//    }
     
     AWeaponSystemProjectileBase* SpawnedRef = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(Projectile, MuzzleLocationRetNG, CameraRot, SpawnParams);
     

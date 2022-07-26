@@ -52,13 +52,29 @@ public:
     class UDataTable* WeaponTypeTable;
 	
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    bool IsAimedAtTarget = false;
+    bool IsAimedAtHitable = false;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     bool IsAimedAtChar = false;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     bool IsAimedAtPickup = false;
+
+    UFUNCTION(BlueprintCallable, Category="Weapon System")
+    void IsAimedAtInt(bool& IsAimedAtTarget)
+    {
+        IsAimedAtTarget = (IsAimedAtHitable || IsAimedAtChar || IsAimedAtPickup);
+    }
+    
+    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
+    bool IsAimedAt() {
+        bool bRet = false;
+        this->IsAimedAtInt(bRet);
+        return bRet;
+    }
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    FHitResult HitResult;
     
 //    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly)
 //    bool GetIsReloading() { return (CurrentWeapon != nullptr ? CurrentWeapon->IsReloading : false ); }

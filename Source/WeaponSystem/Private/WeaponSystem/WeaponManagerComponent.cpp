@@ -54,22 +54,22 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
         APlayerCameraManager* CameraManager = Cast<APlayerCameraManager>(UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0));
         if (CameraManager)
         {
-           FHitResult hitResult;
+//           FHitResult hitResult;
            FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
            FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
 
-           bool isHit = GetWorld()->LineTraceSingleByChannel(hitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+           bool isHit = GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
             
            if (isHit)
            {
-               AActor* HitActor = hitResult.GetActor();
+               AActor* HitActor = HitResult.GetActor();
                if (HitActor)
                {
                    AWeaponSystemCharacterBase* pChar = Cast<AWeaponSystemCharacterBase>(HitActor);
                    if (pChar && !IsAimedAtChar)
                    {
                        IsAimedAtChar = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Character! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Character! %f - %s"), DeltaTime, *HitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
                        if(CurrentCSWidgetNew)
                        {
@@ -92,19 +92,19 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
                    }
                    
                    AHitableActorBase* p = Cast<AHitableActorBase>(HitActor);
-                   if (p && !IsAimedAtTarget)
+                   if (p && !IsAimedAtHitable)
                    {
-                       IsAimedAtTarget = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Hitable! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       IsAimedAtHitable = true;
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Hitable! %f - %s"), DeltaTime, *HitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
                        if(CurrentCSWidgetNew)
                        {
                            CurrentCSWidgetNew->PlayAimedAtAnimation(true);
                        }
                    }
-                   else if(!p && IsAimedAtTarget)
+                   else if(!p && IsAimedAtHitable)
                    {
-                       IsAimedAtTarget = false;
+                       IsAimedAtHitable = false;
                        UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
                        if(CurrentCSWidgetNew)
                        {
@@ -112,7 +112,7 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
                        }
                    }
                    
-                   if(IsAimedAtTarget)
+                   if(IsAimedAtHitable)
                    {
                        return;
                    }
@@ -121,7 +121,7 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
                    if (pick && !IsAimedAtPickup)
                    {
                        IsAimedAtPickup = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Pickup! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Pickup! %f - %s"), DeltaTime, *HitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
                        if(CurrentCSWidgetNew)
                        {
@@ -140,6 +140,13 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
                    
                }
            }
+            else
+            {
+//                HitResult = nullptr;
+                IsAimedAtChar = false;
+                IsAimedAtHitable = false;
+                IsAimedAtPickup = false;
+            }
         }
 //    }
 }
@@ -168,28 +175,28 @@ void UWeaponManagerComponent::PickupWeapon(int32 PickedupWeaponID, int32 AmmoCou
             (*DaWeapon)->AmmoCount += AmmoCount;
         }
         
-        if(CurrentWeapon->WeaponID() != PickedupWeaponID && IsShooting)
+        if(CurrentWeapon->WeaponID() != PickedupWeaponID)
         {
-            StopShooting();
+            IsAimedAtChar = false;
+            IsAimedAtHitable = false;
+            IsAimedAtPickup = false;
+            if(IsShooting)
+            {
+                StopShooting();
+            }
         }
         
         SetCurrentWeapon(PickedupWeaponID, false);
     }
-    
-//    if (WeaponsArrayImpl.ContainsByPredicate([&](UWeaponComponentBase* Result) {return PickedupWeaponID == Result->WeaponID(); })) {
-//        UDbg::DbgMsg(FString::Printf(TEXT("PickupWeapon EXISTS")), 5.0f, FColor::Green);
-//    }
-//    else
-//    {
-//        UDbg::DbgMsg(FString::Printf(TEXT("PickupWeapon DOES NOT EXISTS")), 5.0f, FColor::Green);
-////        WeaponsArrayImpl
-//    }
 }
 
 void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
 {
     if(!CurrentWeapon || CurrentWeapon->WeaponID() != WeaponID)
     {
+        IsAimedAtChar = false;
+        IsAimedAtHitable = false;
+        IsAimedAtPickup = false;
         for(UWeaponComponentBase* Weapon: WeaponsArrayImpl)
         {
             if(Weapon->WeaponID() == WeaponID)
