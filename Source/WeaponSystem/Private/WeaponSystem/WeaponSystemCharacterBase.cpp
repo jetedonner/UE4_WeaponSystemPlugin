@@ -144,7 +144,7 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
                    if (p && !IsAimedAtTarget)
                    {
                        IsAimedAtTarget = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a thing! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Hitable! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
                        if(CurrentCSWidget)
                        {
@@ -173,7 +173,7 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
                    if (pick && !IsAimedAtPickup)
                    {
                        IsAimedAtPickup = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a thing! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
+                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Pickup! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
                        if(CurrentCSWidget)
                        {

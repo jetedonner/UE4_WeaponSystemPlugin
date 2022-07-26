@@ -80,7 +80,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Event|Hit")
     int32 MovingScoreWidgetIdx = 0;
     
-    UFUNCTION()
+    UFUNCTION(BlueprintCallable, Category="Weapon System")
     void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
     
     UFUNCTION(BlueprintCallable, Category="Event|Hit")
