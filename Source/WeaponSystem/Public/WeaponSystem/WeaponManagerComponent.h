@@ -102,6 +102,34 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     EWeaponFunction CurrentWeaponFunction;
     
+    // Internal Functions
+    void GetCurrentWeaponFunctionDefinitionInt(FWeaponFunctionDefinition& WeaponFunctionDefinition);
+    
+    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
+    FWeaponFunctionDefinition GetCurrentWeaponFunctionDefinition() {
+        FWeaponFunctionDefinition WeaponFunctionDefinitionRet;
+        GetCurrentWeaponFunctionDefinitionInt(WeaponFunctionDefinitionRet);
+        return WeaponFunctionDefinitionRet;
+    }
+    
+//
+//    UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
+//    void GetCurrentWeaponFunctionDefinition()
+//    {
+//        if(!IsReloading && NewVal)
+//        {
+//            IsReloading = NewVal;
+//            StartReloading();
+//        }
+//        else if(IsReloading && !NewVal)
+//        {
+//            IsReloading = NewVal;
+//            FinishReloading();
+//        }
+//    }
+    
+   
+    
     void SetCurrentWeapon(int32 WeaponID, bool PlayAudio = true);
     
     UFUNCTION(BlueprintCallable, Category="Weapon System")

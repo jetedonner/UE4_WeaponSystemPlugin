@@ -34,16 +34,26 @@ void UWeaponManagerComponent::BeginPlay()
         
         NewWeaponImpl->OnProjectileHitDelegate.AddDynamic(this, &UWeaponManagerComponent::ProjectileHit);
         NewWeaponImpl->RegisterComponent();
-//        GetOwner()->
         WeaponsArrayImpl.AddUnique(NewWeaponImpl);
     }
     this->SetCurrentWeapon(1, false);
 }
 
-// Called every frame
 void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
+
+void UWeaponManagerComponent::GetCurrentWeaponFunctionDefinitionInt(FWeaponFunctionDefinition& WeaponFunctionDefinition)
+{
+    if(CurrentWeaponFunction == EWeaponFunction::Primary)
+    {
+        WeaponFunctionDefinition = CurrentWeapon->WeaponDefinition()->PrimaryWeaponFunctionDefinition;
+    }
+    else
+    {
+        WeaponFunctionDefinition = CurrentWeapon->WeaponDefinition()->SecondaryWeaponFunctionDefinition;
+    }
 }
 
 void UWeaponManagerComponent::PickupWeapon(int32 PickedupWeaponID, int32 AmmoCount)
