@@ -51,6 +51,12 @@ public:
     float DamageFactor = 5.0;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float Cadence = 1.0;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float ReloadTimeout = 1.0;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     class USoundCue* ShootingSound;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")

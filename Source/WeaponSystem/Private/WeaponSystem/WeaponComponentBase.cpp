@@ -96,28 +96,20 @@ void UWeaponComponentBase::GetMuzzleRotationInt(FRotator& MuzzleRotationRet, FVe
     FRotator CameraRot;
     
     AActor* ActorRef = GetWorld()->GetFirstPlayerController()->GetPawn();
-    
     AWeaponSystemCharacterBase* WSActor = Cast<AWeaponSystemCharacterBase>(ActorRef);
-    
     ActorRef->GetActorEyesViewPoint(CameraLoc, CameraRot);
-    
     CameraLoc = ActorRef->GetActorLocation();
-//    CameraRot = ActorRef->GetActorRotation();
     
     if(WSActor)
     {
-//        WSActor->FirstPersonCamera;
         CameraLoc = WSActor->FirstPersonCamera->GetComponentLocation();
-        CameraLoc += WSActor->FirstPersonCamera->GetForwardVector() * 205.0f;
+        CameraLoc += WSActor->FirstPersonCamera->GetForwardVector() * 25.0f;
     }
     
     FVector MuzzleOffset;
     MuzzleOffset.Set(0.0f, 0.0f, 0.0f);
     MuzzleLocRet = CameraLoc + FTransform(CameraRot).TransformVector(MuzzleOffset);
-    
     MuzzleRotationRet = CameraRot;
-//    MuzzleLocRet = CameraLoc;
-//    return CameraRot;
 }
 
 void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
