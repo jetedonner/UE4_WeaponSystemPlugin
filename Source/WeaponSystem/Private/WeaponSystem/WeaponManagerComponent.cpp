@@ -168,30 +168,40 @@ void UWeaponManagerComponent::StartShooting(EWeaponFunction WeaponFunction)
         CurrentWeaponFunction = WeaponFunction;
 //        CurrentWeapon->MuzzleOffset = MuzzleOffset;
         uint32 Tock = TimerUtil->Tock();
-
+        float CurrCadence = 0.95f;
+        if(CurrentWeaponFunction == EWeaponFunction::Primary)
+        {
+            CurrCadence = CurrentWeapon->WeaponDefinition()->PrimaryWeaponFunctionDefinition.Cadence;
+        }
+        else
+        {
+            CurrCadence = CurrentWeapon->WeaponDefinition()->SecondaryWeaponFunctionDefinition.Cadence;
+        }
+        
         if(!IsShooting){
             if(Tock == 0)
             {
                 UE_LOG(LogSuake3D, Warning, TEXT("Tock == 0 => Firing first shot after change / init!"));
                 IsShooting = true;
                 TimerUtil->Tick();
-                GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrentWeapon->WeaponDefinition()->Cadence, true, 0.0f);
+                
+                GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/, true, 0.0f);
                 return;
             }
         }
 
-        if(!IsShooting && (Tock == 0 || (Tock / 10000000.0f) >= CurrentWeapon->WeaponDefinition()->Cadence))
+        if(!IsShooting && (Tock == 0 || (Tock / 10000000.0f) >= CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/))
         {
             IsShooting = true;
             TimerUtil->Tick();
 
-            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrentWeapon->WeaponDefinition()->Cadence, true, 0.0f);
+            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/, true, 0.0f);
             if(Tock == 0){
                 FireShot();
             }
-        }else if(!IsShooting && (Tock / 10000000.0f) < CurrentWeapon->WeaponDefinition()->Cadence){
+        }else if(!IsShooting && (Tock / 10000000.0f) < CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/){
             IsShooting = true;
-            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrentWeapon->WeaponDefinition()->Cadence, true, CurrentWeapon->WeaponDefinition()->Cadence - (Tock / 10000000.0f));
+            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/, true, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/ - (Tock / 10000000.0f));
         }
     }
 }
@@ -262,7 +272,16 @@ void UWeaponManagerComponent::FinishReloading()
         
         if(IsShooting)
         {
-            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrentWeapon->WeaponDefinition()->Cadence, true, 0.0f);
+            float CurrCadence = 0.95f;
+            if(CurrentWeaponFunction == EWeaponFunction::Primary)
+            {
+                CurrCadence = CurrentWeapon->WeaponDefinition()->PrimaryWeaponFunctionDefinition.Cadence;
+            }
+            else
+            {
+                CurrCadence = CurrentWeapon->WeaponDefinition()->SecondaryWeaponFunctionDefinition.Cadence;
+            }
+            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/, true, 0.0f);
         }
     }
 }

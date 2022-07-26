@@ -114,7 +114,7 @@ void UWeaponComponentBase::GetMuzzleRotationInt(FRotator& MuzzleRotationRet, FVe
 
 void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
 {
-    UE_LOG(LogSuake3D, Warning, TEXT("UWeaponComponentBase::FireShot() !!!!!!!"));
+    UE_LOG(LogSuake3D, Warning, TEXT("UWeaponComponentBase::ExecFireShot() !!!!!!!"));
     
     FVector  CameraLoc;
     FRotator CameraRot;
@@ -182,6 +182,8 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     }
     
     AWeaponSystemProjectileBase* SpawnedRef = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(Projectile, MuzzleLocationRetNG, CameraRot, SpawnParams);
+    
+    UDbg::DbgMsg(FString::Printf(TEXT("UWeaponComponentBase: -> SpawnActor Vector: %s"), *MuzzleLocationRetNG.ToString()), 5.0f, FColor::Red);
     
     if(SpawnedRef == NULL)
     {
