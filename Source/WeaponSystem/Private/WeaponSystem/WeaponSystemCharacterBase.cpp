@@ -6,13 +6,10 @@
 //  Copyright © 1991 - 2022 DaVe Inc. kimhauser.ch, All rights reserved.
 //
 
-
 #include "WeaponSystem/WeaponSystemCharacterBase.h"
 
-// Sets default values
 AWeaponSystemCharacterBase::AWeaponSystemCharacterBase()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -21,11 +18,9 @@ AWeaponSystemCharacterBase::AWeaponSystemCharacterBase(const FObjectInitializer&
     PrimaryActorTick.bCanEverTick = true;
     
     UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase::AWeaponSystemCharacterBase() WITH ObjectInitializer !!!"));
-
-    UE_LOG(LogTemp, Warning, TEXT("HOT RELOAD TEST"));
     
-    if(!WeaponManagerComponent){
-        
+    if(!WeaponManagerComponent)
+    {
         WeaponManagerComponent = ObjectInitializer.CreateDefaultSubobject<UWeaponManagerComponent>(this, TEXT("Weapon Manager Component"));
         WeaponManagerComponent->bEditableWhenInherited = true;
         
@@ -34,14 +29,16 @@ AWeaponSystemCharacterBase::AWeaponSystemCharacterBase(const FObjectInitializer&
         WeaponManagerComponent->SetupAttachment(RootComponent);
     }
     
-    if(!HealthManagerComponent){
+    if(!HealthManagerComponent)
+    {
         HealthManagerComponent = ObjectInitializer.CreateDefaultSubobject<UHealthManagerComponent>(this, TEXT("Health Manager Component"));
         HealthManagerComponent->bEditableWhenInherited = true;
         HealthManagerComponent->OnReceivedAnyDamageDelegate.AddDynamic(this, &AWeaponSystemCharacterBase::OnReceivedAnyDamage);
         this->AddOwnedComponent(HealthManagerComponent);
     }
     
-    if(!ScoreManagerComponent){
+    if(!ScoreManagerComponent)
+    {
         ScoreManagerComponent = ObjectInitializer.CreateDefaultSubobject<UScoreManagerComponent>(this, TEXT("Score Manager Component"));
         ScoreManagerComponent->bEditableWhenInherited = true;
         this->AddOwnedComponent(ScoreManagerComponent);
@@ -62,27 +59,24 @@ AWeaponSystemCharacterBase::AWeaponSystemCharacterBase(const FObjectInitializer&
     if(!FirstPersonCamera)
     {
         FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
-        FirstPersonCamera->SetupAttachment(RootComponent, "head"); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
-        FirstPersonCamera->bUsePawnControlRotation = true; // Camera does not rotate relative to arm
+        FirstPersonCamera->SetupAttachment(RootComponent, "head");
+        FirstPersonCamera->bUsePawnControlRotation = true;
     }
     
     const ConstructorHelpers::FObjectFinder<UCurveFloat> Curve(TEXT("CurveFloat'/WeaponSystem/Materials/DieMaterialCurve.DieMaterialCurve'"));
     TimeLine = FTimeline{};
     FOnTimelineFloat progressFunction{};
-    progressFunction.BindUFunction(this, "EffectProgress"); // The function EffectProgress gets called
+    progressFunction.BindUFunction(this, "EffectProgress");
     TimeLine.AddInterpFloat(Curve.Object, progressFunction, FName{TEXT("EFFECTFADE")});
 }
 
-// Called when the game starts or when spawned
 void AWeaponSystemCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
     
-//    this->OnActorHit.AddDynamic(this, &AWeaponSystemCharacterBase::OnActorGotHit);
     Cast<AActor>(this)->OnTakeAnyDamage.AddDynamic(this, &AWeaponSystemCharacterBase::OnTakeAnyDamageNG);
 }
 
-// Called every frame
 void AWeaponSystemCharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

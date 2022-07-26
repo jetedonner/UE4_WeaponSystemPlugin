@@ -67,6 +67,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     float KimsVar = 123.0f;
     
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float VarHOTRELOAD = 123.0f;
+    
     UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
     void SetIsReloading(const bool NewVal)
     {
