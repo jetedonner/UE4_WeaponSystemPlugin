@@ -252,6 +252,11 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
     }
 }
 
+void UWeaponManagerComponent::IsAimedAtInt(bool& IsAimedAtTarget)
+{
+    IsAimedAtTarget = isHit;
+}
+
 void UWeaponManagerComponent::ProjectileFired(class AActor* ProjectileActor)
 {
     this->OnProjectileFireDelegate.Broadcast(ProjectileActor);

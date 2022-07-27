@@ -61,10 +61,10 @@ public:
     bool IsAimedAtPickup = false;
 
     UFUNCTION(BlueprintCallable, Category="Weapon System")
-    void IsAimedAtInt(bool& IsAimedAtTarget)
-    {
-        IsAimedAtTarget = isHit;//(IsAimedAtHitable || IsAimedAtChar || IsAimedAtPickup);
-    }
+    void IsAimedAtInt(bool& IsAimedAtTarget);
+//    {
+//        IsAimedAtTarget = isHit;//(IsAimedAtHitable || IsAimedAtChar || IsAimedAtPickup);
+//    }
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     bool isHit = false;
