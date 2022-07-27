@@ -27,11 +27,7 @@ void UCrosshairUserWidgetBase::NativeConstruct()
 
 void UCrosshairUserWidgetBase::OnAnimateCrosshair_Implementation(bool AlternativeAnimation)
 {
-//    if(OnCrosshairAnimationDelegate)
-//    {
-//    OnCrosshairAnimationDelegate.Broadcast(AlternativeAnimation);
-//    }
-    UE_LOG(LogSuake3D, Warning, TEXT("Animate CS !!!!!"));
+    
 }
 
 void UCrosshairUserWidgetBase::FillAnimationsMap()

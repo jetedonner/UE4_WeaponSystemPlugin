@@ -120,8 +120,6 @@ void UWeaponComponentBase::GetMuzzleRotationInt(FRotator& MuzzleRotationRet, FVe
 
 void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
 {
-    UE_LOG(LogSuake3D, Warning, TEXT("UWeaponComponentBase::ExecFireShot() !!!!!!!"));
-    
     FVector  CameraLoc;
     FRotator CameraRot;
     
@@ -151,10 +149,6 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     SpawnParams.Owner = ActorRef;
     SpawnParams.Instigator = ActorRef->GetInstigator();
     SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-    
-//    UE_LOG(LogSuake3D, Warning, TEXT("MuzzleOffset: %s"), *MuzzleOffset.ToString());
-//    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("MuzzleOffset: %s"), *MuzzleOffset.ToString()));
-//    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("MuzzleLocation: %s"), *MuzzleLocation.ToString()));
     
     if(WeaponFunction == EWeaponFunction::Secondary)
     {
@@ -194,20 +188,13 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     
     if(SpawnedRef == NULL)
     {
-        UE_LOG(LogSuake3D, Warning, TEXT("WE HAVENT GOT SpawnedRef OBJECT!"));
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("WE HAVENT GOT SpawnedRef OBJECT!")));
+        UDbg::DbgMsg(FString::Printf(TEXT("We have NO new SPAWNED OBJECT")), 5.0f, FColor::Red);
     }
     else
     {
         FVector origin;
         FVector boxExtent;
         SpawnedRef->GetActorBounds(false, origin, boxExtent);
-        
-//        UE_LOG(LogSuake3D, Warning, TEXT("Projectile origin: %s"), *origin.ToString());
-//        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Projectile origin: %s"), *origin.ToString()));
-//
-//        UE_LOG(LogSuake3D, Warning, TEXT("Projectile box: %s"), *boxExtent.ToString());
-//        GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("Projectile box: %s"), *boxExtent.ToString()));
         
         FVector LaunchDirection = MuzzleRotationRetNG.Vector();
         SpawnedRef->OnProjectileHitDelegate.AddDynamic(this, &UWeaponComponentBase::ProjectileHit);
@@ -228,7 +215,6 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
 
 void UWeaponComponentBase::ProjectileHit(class AActor* ProjectileActor, class AActor* OtherActor, const FVector Location)
 {
-    UE_LOG(LogSuake3D, Warning, TEXT("UWeaponComponentBase::ProjectileHit() !!!"));
     this->OnProjectileHitDelegate.Broadcast(ProjectileActor, OtherActor, Location);
 }
 

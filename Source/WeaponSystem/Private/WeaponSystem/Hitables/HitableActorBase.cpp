@@ -72,8 +72,6 @@ void AHitableActorBase::Tick(float DeltaTime)
 
 void AHitableActorBase::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-    UE_LOG(LogSuake3D, Warning, TEXT("AHitableActorBase::OnHit"));
-    
     //this->ExecActorHitHandler(OtherActor, Hit);
     //this->OnComponentGotHit(HitComponent, OtherActor, NormalImpulse, Hit);
 }
@@ -85,7 +83,6 @@ void AHitableActorBase::OnComponentGotHit_Implementation(UPrimitiveComponent* Hi
 
 void AHitableActorBase::ExecActorHitHandler(AActor* OtherActor, const FHitResult& Hit)
 {
-    UE_LOG(LogSuake3D, Warning, TEXT("AHitableActorBase::ExecActorHitHandler"));
     UDbg::DbgMsg(FString::Printf(TEXT("AHitableActorBase::ExecActorHitHandler")), 5.0f, FColor::Green);
     
     bool FoundActor = false;
@@ -115,8 +112,6 @@ void AHitableActorBase::ExecActorHitHandler(AActor* OtherActor, const FHitResult
             {
                 float NewScore = 0.0f;
                 PlayerCharacter->ScoreManagerComponent->AddScore(this->HitScore, NewScore);
-                
-                UE_LOG(LogSuake3D, Warning, TEXT("AHitableActorBase::ExecActorHitHandler: NewScore: %f"), NewScore);
             }
             
             if(ShowMovingScore)
@@ -155,7 +150,7 @@ void AHitableActorBase::ExecActorHitHandler(AActor* OtherActor, const FHitResult
 
                 if(MovingScoreWidgetObj == nullptr)
                 {
-                    UE_LOG(LogSuake3D, Error, TEXT("MovingScoreWidgetObj == nullptr"));
+                    UDbg::DbgMsg(FString::Printf(TEXT("MovingScoreWidgetObj == nullptr")), 5.0f, FColor::Red);
                 }
                 else
                 {

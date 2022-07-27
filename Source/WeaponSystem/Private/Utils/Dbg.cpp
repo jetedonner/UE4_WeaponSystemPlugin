@@ -14,7 +14,7 @@ void UDbg::DbgMsg(const FString& DebugMessage, float Duration, FColor TextColor,
     
     if(DevHelper->DebugMode)
     {
-        UE_LOG(LogSuake3D, Log, TEXT("%s"), *DebugMessage);
+        UE_LOG(WeaponSysPlugin, Log, TEXT("%s"), *DebugMessage);
         
         if(!ConsoleOnly && DevHelper->OnScreeLog)
         {

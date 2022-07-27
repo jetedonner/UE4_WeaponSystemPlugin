@@ -14,6 +14,7 @@
 #include "GameFramework/Character.h"
 #include "Components/SceneComponent.h"
 #include "Utils/GlobalDefinitions.h"
+#include "Utils/Dbg‡.h"
 #include "HUDFunc.generated.h"
 
 /**

@@ -13,6 +13,6 @@
 #ifndef GlobalDefinitions_h
 #define GlobalDefinitions_h
 
-DECLARE_LOG_CATEGORY_EXTERN(LogSuake3D, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(WeaponSysPlugin, Log, All);
 
 #endif /* GlobalDefinitions_h */

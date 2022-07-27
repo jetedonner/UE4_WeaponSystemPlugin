@@ -35,13 +35,13 @@ public:
     FWeaponFunctionDefinition()
     {
         this->WeaponFunction = EWeaponFunction::Primary;
-        UE_LOG(LogTemp, Warning, TEXT("FWeaponFunctionDefinition()"));
+//        UE_LOG(LogTemp, Warning, TEXT("FWeaponFunctionDefinition()"));
     }
     
     FWeaponFunctionDefinition(EWeaponFunction _WeaponFunction)
     {
         this->WeaponFunction = _WeaponFunction;
-        UE_LOG(LogTemp, Warning, TEXT("FWeaponFunctionDefinition(EWeaponFunction _WeaponFunction)"));
+//        UE_LOG(LogTemp, Warning, TEXT("FWeaponFunctionDefinition(EWeaponFunction _WeaponFunction)"));
     }
     
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon System")

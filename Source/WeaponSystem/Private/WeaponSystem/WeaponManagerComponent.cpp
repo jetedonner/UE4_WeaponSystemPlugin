@@ -6,10 +6,7 @@
 //  Copyright © 1991 - 2022 DaVe Inc. kimhauser.ch, All rights reserved.
 //
 
-
 #include "WeaponSystem/WeaponManagerComponent.h"
-
-//DEFINE_LOG_CATEGORY(LogSuake3D);
 
 UWeaponManagerComponent::UWeaponManagerComponent()
 {
@@ -69,7 +66,6 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
                    if (pChar && !IsAimedAtChar)
                    {
                        IsAimedAtChar = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Character! %f - %s"), DeltaTime, *HitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
                        if(CurrentCSWidgetNew)
                        {
@@ -95,7 +91,6 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
                    if (p && !IsAimedAtHitable)
                    {
                        IsAimedAtHitable = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Hitable! %f - %s"), DeltaTime, *HitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
                        if(CurrentCSWidgetNew)
                        {
@@ -121,7 +116,6 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
                    if (pick && !IsAimedAtPickup)
                    {
                        IsAimedAtPickup = true;
-                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Pickup! %f - %s"), DeltaTime, *HitResult.GetActor()->GetName());
                        UCrosshairUserWidgetBase* CurrentCSWidgetNew = Cast<UCrosshairUserWidgetBase>(this->CurrentCSWidget);
                        if(CurrentCSWidgetNew)
                        {
@@ -211,7 +205,7 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
                     GetWorld()->GetTimerManager().ClearTimer(ShootingTimerHandle);
                 }
                 
-                UE_LOG(LogTemp, Warning, TEXT("UWeaponManagerComponent::SetCurrentWeapon: %i ..."), WeaponID);
+//                UE_LOG(LogTemp, Warning, TEXT("UWeaponManagerComponent::SetCurrentWeapon: %i ..."), WeaponID);
                 
                 CurrentWeapon = Weapon;
                 
@@ -260,16 +254,12 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
 
 void UWeaponManagerComponent::ProjectileFired(class AActor* ProjectileActor)
 {
-    UE_LOG(LogSuake3D, Warning, TEXT("UA_WeaponManagerComponent::ProjectileFired() !!!!!!!"));
-    
     this->OnProjectileFireDelegate.Broadcast(ProjectileActor);
 }
 
 void UWeaponManagerComponent::StartShooting(EWeaponFunction WeaponFunction)
 {
-    
-    
-    UE_LOG(LogTemp, Warning, TEXT("UWeaponManagerComponent::StartShooting()"));
+//    UE_LOG(LogTemp, Warning, TEXT("UWeaponManagerComponent::StartShooting()"));
     
     if(IsReloading)
     {
@@ -298,7 +288,6 @@ void UWeaponManagerComponent::StartShooting(EWeaponFunction WeaponFunction)
         if(!IsShooting){
             if(Tock == 0)
             {
-                UE_LOG(LogSuake3D, Warning, TEXT("Tock == 0 => Firing first shot after change / init!"));
                 IsShooting = true;
                 TimerUtil->Tick();
                 
@@ -447,7 +436,5 @@ void UWeaponManagerComponent::FireShot()
 
 void UWeaponManagerComponent::ProjectileHit(class AActor* ProjectileActor, class AActor* OtherActor, const FVector Location)
 {
-    UE_LOG(LogSuake3D, Warning, TEXT("UWeaponManagerComponent::ProjectileHit() !!!"));
-    
     this->OnProjectileHitDelegate.Broadcast(ProjectileActor, OtherActor, Location);
 }

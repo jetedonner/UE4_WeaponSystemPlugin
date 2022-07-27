@@ -28,7 +28,7 @@ void UHealthManagerComponent::ApplyDamage(AActor* DamagedActor, float Damage, co
     float NewHealth = 0.0f;
     DecreaseHealth(Damage, NewHealth);
     
-    UE_LOG(LogTemp, Warning, TEXT("UHealthManagerComponent::ApplyDamageNG: NewHealth: %f"), Health);
+//    UE_LOG(LogTemp, Warning, TEXT("UHealthManagerComponent::ApplyDamageNG: NewHealth: %f"), Health);
     
     this->OnReceivedAnyDamageDelegate.Broadcast(Damage, DamageType, InstigatedBy, DamageCauser);
 }

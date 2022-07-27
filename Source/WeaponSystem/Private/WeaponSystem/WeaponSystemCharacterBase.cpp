@@ -17,7 +17,7 @@ AWeaponSystemCharacterBase::AWeaponSystemCharacterBase(const FObjectInitializer&
 {
     PrimaryActorTick.bCanEverTick = true;
     
-    UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase::AWeaponSystemCharacterBase() WITH ObjectInitializer !!!"));
+//    UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase::AWeaponSystemCharacterBase() WITH ObjectInitializer !!!"));
     
     if(!WeaponManagerComponent)
     {
@@ -80,122 +80,7 @@ void AWeaponSystemCharacterBase::BeginPlay()
 void AWeaponSystemCharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-    return;
-    
-//    if(!IsPlayerControlled())
-//    {
-//        return;
-//    }
-//    
-//    if (GetWorld())
-//    {
-//        APlayerCameraManager* CameraManager = Cast<APlayerCameraManager>(UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0));
-//        if (CameraManager)
-//        {
-//           FHitResult hitResult;
-//           FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
-//           FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
-//
-//           bool isHit = GetWorld()->LineTraceSingleByChannel(hitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
-//            
-//           if (isHit)
-//           {
-//               AActor* HitActor = hitResult.GetActor();
-//               if (HitActor)
-//               {
-//                   AWeaponSystemCharacterBase* pChar = Cast<AWeaponSystemCharacterBase>(HitActor);
-//                   if (pChar && !IsAimedAtChar)
-//                   {
-//                       IsAimedAtChar = true;
-//                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Character! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
-//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-//                       if(CurrentCSWidget)
-//                       {
-//                           CurrentCSWidget->PlayAimedAtAnimation(true);
-//                       }
-//                   }
-//                   else if(!pChar && IsAimedAtChar)
-//                   {
-//                       IsAimedAtChar = false;
-////                       IsAimedAtTarget = false;
-//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-//                       if(CurrentCSWidget)
-//                       {
-////                           CurrentCSWidget->OnAnimateCrosshair(false);
-//                           CurrentCSWidget->PlayAimedAtAnimation(false);
-//                       }
-//                   }
-//                   
-//                   if(IsAimedAtChar)
-//                   {
-//                       return;
-//                   }
-//                   
-//                   AHitableActorBase* p = Cast<AHitableActorBase>(HitActor);
-//                   if (p && !IsAimedAtTarget)
-//                   {
-//                       IsAimedAtTarget = true;
-//                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Hitable! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
-//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-//                       if(CurrentCSWidget)
-//                       {
-////                           CurrentCSWidget->OnAnimateCrosshair(true);
-//                           CurrentCSWidget->PlayAimedAtAnimation(true);
-//                       }
-////#include "Blueprint/WidgetBlueprintLibrary.h"
-//                   }
-//                   else if(!p && IsAimedAtTarget)
-//                   {
-//                       IsAimedAtTarget = false;
-//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-//                       if(CurrentCSWidget)
-//                       {
-////                           CurrentCSWidget->OnAnimateCrosshair(false);
-//                           CurrentCSWidget->PlayAimedAtAnimation(false);
-//                       }
-//                   }
-//                   
-//                   if(IsAimedAtTarget)
-//                   {
-//                       return;
-//                   }
-//                   
-//                   AWeaponPickupActorBase* pick = Cast<AWeaponPickupActorBase>(HitActor);
-//                   if (pick && !IsAimedAtPickup)
-//                   {
-//                       IsAimedAtPickup = true;
-//                       UE_LOG(LogSuake3D, Warning, TEXT("I hit a Pickup! %f - %s"), DeltaTime, *hitResult.GetActor()->GetName());
-//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-//                       if(CurrentCSWidget)
-//                       {
-////                           CurrentCSWidget->OnAnimateCrosshair(true);
-//                           CurrentCSWidget->PlayAimedAtAnimation(true);
-//                       }
-////#include "Blueprint/WidgetBlueprintLibrary.h"
-//                   }
-//                   else if(!pick && IsAimedAtPickup)
-//                   {
-//                       IsAimedAtPickup = false;
-//                       UCrosshairUserWidgetBase* CurrentCSWidget = Cast<UCrosshairUserWidgetBase>(WeaponManagerComponent->CurrentCSWidget);
-//                       if(CurrentCSWidget)
-//                       {
-////                           CurrentCSWidget->OnAnimateCrosshair(false);
-//                           CurrentCSWidget->PlayAimedAtAnimation(false);
-//                       }
-//                   }
-//                   
-//               }
-//           }
-//        }
-//    }
-    
 }
-
-//void APracticeCharacter::Tick(float DeltaTime)
-//{
-//
-//}
 
 // Called to bind functionality to input
 void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -206,11 +91,11 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
     
     if(!WeaponManagerComponent)
     {
-        UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase->WeaponManagerComponent NOT setup ..."));
+//        UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase->WeaponManagerComponent NOT setup ..."));
     }
     else
     {
-        UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase->WeaponManagerComponent IS setup ..."));
+//        UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase->WeaponManagerComponent IS setup ..."));
         
         const FKey PrimaryShootKey = WeaponManagerComponent->PrimaryShootKey;
         
@@ -220,7 +105,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
 
         KBP_PrimaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (primary) STARTED ..."));
+//            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (primary) STARTED ..."));
 //            UDbg::DbgMsg(FString(TEXT("SHOOTING PRIMARY!!!")), 5.0f, FColor::Orange);
             WeaponManagerComponent->StartShooting();
 //            ActivateWeapon(PrimaryShootKey, WeaponDefinition->WeaponID);
@@ -234,7 +119,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBR_PrimaryShootKey.bExecuteWhenPaused = false;
         KBR_PrimaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (primary) ENDED ..."));
+//            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (primary) ENDED ..."));
 //            UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED PRIMARY!!!")), 5.0f, FColor::Orange);
             WeaponManagerComponent->StopShooting();
 //            Delegate.ExecuteIfBound(Key, false);
@@ -249,7 +134,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
 
         KBP_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) STARTED ..."));
+//            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) STARTED ..."));
             UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StartShooting(EWeaponFunction::Secondary);
 //            ActivateWeapon(PrimaryShootKey, WeaponDefinition->WeaponID);
@@ -261,7 +146,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBR_SecondaryShootKey.bExecuteWhenPaused = false;
         KBR_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) ENDED ..."));
+//            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) ENDED ..."));
             UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StopShooting();
 //            Delegate.ExecuteIfBound(Key, false);
@@ -283,7 +168,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
                     
                     FString tmp = EKeys::GetKeyDetails(Key)->GetDisplayName(true).ToString();
 
-                    UE_LOG(LogTemp, Warning, TEXT("SettingUp KeyBinding: %s => %s"), *It->GetName(), *tmp);
+//                    UE_LOG(LogTemp, Warning, TEXT("SettingUp KeyBinding: %s => %s"), *It->GetName(), *tmp);
                     
                     // Listen for key pressed
                     FInputKeyBinding KBP(FInputChord(Key, false, false, false, false), EInputEvent::IE_Pressed);
@@ -339,9 +224,6 @@ void AWeaponSystemCharacterBase::ProjectileHit(class AActor* ProjectileActor, cl
         {
             float NewScore = 0.0f;
             this->ScoreManagerComponent->AddScore(OtherCharacter->HitScore, NewScore);
-//            UE_LOG(LogSuake3D, Log, TEXT("NEW SCORE: %f"), this->ScoreManagerComponent->Score);
-            
-            
         }
     }
 }
@@ -350,16 +232,6 @@ void AWeaponSystemCharacterBase::EffectProgress(float Value)
 {
 //    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("EffectProgress: timeline: %f value:%f"), TimeLine.GetPlaybackPosition(), Value));
 }
-
-//void AWeaponSystemCharacterBase::StartTimeline()
-//{
-//    GetWorldTimerManager().ClearTimer(TimerStartHandle);
-//    
-//    TimeLine.PlayFromStart();
-//    
-//    GetWorldTimerManager().SetTimer(TimerHandle, this, &AWeaponSystemCharacterBase::TickTimeline, DELTATIME, true, 0.0f);
-//    
-//}
 
 void AWeaponSystemCharacterBase::TickTimeline()
 {
@@ -378,15 +250,8 @@ void AWeaponSystemCharacterBase::OnReceivedAnyDamage(float Damage, const class U
 {
     if(HealthManagerComponent)
     {
-//        bool DidDie = false;
-//        HealthManagerComponent->ApplyDamage(Damage, DidDie);
-        
         Cast<UFloatingHealthBarWidget>(FloatingHealthBar->GetUserWidgetObject())->Health = HealthManagerComponent->Health;
-        
-        UE_LOG(LogSuake3D, Warning, TEXT("AWeaponSystemCharacterBase::OnReceivedAnyDamage() => Died: %s"), (this->HealthManagerComponent->Died ? TEXT("true") : TEXT("false")));
-        
-    //    this->OnActorGotHit(this, DamageCauser, );
-        
+
         if(this->HealthManagerComponent->Died)
         {
             if(DieSound)
@@ -409,8 +274,6 @@ void AWeaponSystemCharacterBase::OnTakeAnyDamageNG(AActor* DamagedActor, float D
         {
             HealthManagerComponent->ApplyDamage(DamagedActor, Damage, DamageType, InstigatedBy, DamageCauser);
             
-            UE_LOG(LogSuake3D, Warning, TEXT("AWeaponSystemCharacterBase::OnActorGotHit_Implementation() => Died: %s"), (this->HealthManagerComponent->Died ? TEXT("true") : TEXT("false")));
-            
             if(this->HealthManagerComponent->Died)
             {
                 if(DieSound)
@@ -426,11 +289,6 @@ void AWeaponSystemCharacterBase::OnActorGotHit_Implementation(AActor* SelfActor,
 {
     if(HealthManagerComponent)
     {
-//        bool DidDie = false;
-//        HealthManagerComponent->ApplyDamage(Damage, DidDie);
-        
-        UE_LOG(LogSuake3D, Warning, TEXT("AWeaponSystemCharacterBase::OnActorGotHit_Implementation() => Died: %s"), (this->HealthManagerComponent->Died ? TEXT("true") : TEXT("false")));
-        
         if(this->HealthManagerComponent->Died)
         {
             if(DieSound)

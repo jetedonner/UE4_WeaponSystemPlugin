@@ -12,13 +12,13 @@ void UHUDFunc::RotateToPlayer(USceneComponent* RotateComponent, ACharacter* Play
 {
     if(RotateComponent == nullptr)
     {
-        UE_LOG(LogSuake3D, Error, TEXT("RotateComponent IS NULL"));
+        UDbg::DbgMsg(FString::Printf(TEXT("RotateComponent IS NULL")), 5.0f, FColor::Red);
         return;
     }
     
     if(PlayerCharacter == nullptr)
     {
-        UE_LOG(LogSuake3D, Error, TEXT("PlayerCharacter IS NULL"));
+        UDbg::DbgMsg(FString::Printf(TEXT("PlayerCharacter IS NULL")), 5.0f, FColor::Red);
         return;
     }
     

@@ -18,7 +18,7 @@ AWeaponSystemHUDBase::AWeaponSystemHUDBase()
     
     if (MyWidgetClass == nullptr)
     {
-        UE_LOG(LogTemp, Warning, TEXT("MyWidgetClass NOT LOADED ..."));
+//        UE_LOG(LogTemp, Warning, TEXT("MyWidgetClass NOT LOADED ..."));
     }
     else
     {
