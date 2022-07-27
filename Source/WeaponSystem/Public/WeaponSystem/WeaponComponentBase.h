@@ -28,7 +28,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponStoppedShootingDelegate, UWea
 //    Secondary               UMETA(DisplayName = "Secondary weapon function"),
 //};
 
-UCLASS(Blueprintable, config=Game, defaultconfig)
+UCLASS(Blueprintable, Config=Game)
 class WEAPONSYSTEM_API UWeaponComponentBase : public UActorComponent
 {
 	GENERATED_BODY()
@@ -39,8 +39,8 @@ public:
 
     UWeaponComponentBase(const FObjectInitializer& ObjectInitializer);
     
-//    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float ExampleVariable;
+    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    float PluginExampleVariable = 123.456f;
 //
 //    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
 //    float ExampleVar;

@@ -16,7 +16,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS()//Config=Game)
 class WEAPONSYSTEM_API AWeaponSystemGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
@@ -24,4 +24,9 @@ class WEAPONSYSTEM_API AWeaponSystemGameModeBase : public AGameModeBase
 public:
     AWeaponSystemGameModeBase();
     
+//    UPROPERTY(Config)
+//    bool DebugMode = true;
+    
 };
+
+

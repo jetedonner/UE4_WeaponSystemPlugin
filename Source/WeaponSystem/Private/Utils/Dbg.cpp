@@ -10,18 +10,15 @@
 
 void UDbg::DbgMsg(const FString& DebugMessage, float Duration, FColor TextColor, const bool ConsoleOnly)
 {
-    UE_LOG(LogSuake3D, Log, TEXT("%s"), *DebugMessage);
+    UDevHelper* DevHelper = NewObject<UDevHelper>(UDevHelper::StaticClass());
     
-    if(!ConsoleOnly)
+    if(DevHelper->DebugMode)
     {
-        GEngine->AddOnScreenDebugMessage(-1, Duration, TextColor, DebugMessage);
+        UE_LOG(LogSuake3D, Log, TEXT("%s"), *DebugMessage);
+        
+        if(!ConsoleOnly && DevHelper->OnScreeLog)
+        {
+            GEngine->AddOnScreenDebugMessage(-1, Duration, TextColor, DebugMessage);
+        }
     }
-//    if(ConsoleOnly)
-//    {
-//        UE_LOG(LogSuake3D, Log, TEXT("%s"), *DebugMessage);
-//    }
-//    else
-//    {
-//        GEngine->AddOnScreenDebugMessage(-1, Duration, TextColor, DebugMessage);
-//    }
 }
