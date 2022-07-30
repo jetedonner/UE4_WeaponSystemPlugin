@@ -61,7 +61,7 @@ public:
     bool IsAimedAtPickup = false;
 
     UFUNCTION(BlueprintCallable, Category="Weapon System")
-    void IsAimedAtInt(bool& IsAimedAtTarget);
+    void IsAimedAt(bool& IsAimedAtTarget, FHitResult& HitResult);
 //    {
 //        IsAimedAtTarget = isHit;//(IsAimedAtHitable || IsAimedAtChar || IsAimedAtPickup);
 //    }
@@ -70,14 +70,15 @@ public:
     bool isHit = false;
     
     UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
-    bool IsAimedAt() {
+    bool IsAimedAtInt() {
         bool bRet = false;
-        this->IsAimedAtInt(bRet);
+        FHitResult HitResult;
+        this->IsAimedAt(bRet, HitResult);
         return bRet;
     }
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    FHitResult HitResult;
+    FHitResult MyHitResult;
     
 //    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly)
 //    bool GetIsReloading() { return (CurrentWeapon != nullptr ? CurrentWeapon->IsReloading : false ); }

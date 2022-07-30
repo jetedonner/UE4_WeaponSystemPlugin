@@ -55,11 +55,11 @@ void UWeaponManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
            FVector Start = CameraManager->GetCameraLocation() - FVector(0.0f, 0.0f, 30.0f);
            FVector End = Start + 10000.0 * CameraManager->GetActorForwardVector();
 
-           isHit = GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
+           isHit = GetWorld()->LineTraceSingleByChannel(MyHitResult, Start, End, ECollisionChannel::ECC_GameTraceChannel1);
             
            if (isHit)
            {
-               AActor* HitActor = HitResult.GetActor();
+               AActor* HitActor = MyHitResult.GetActor();
                if (HitActor)
                {
                    AWeaponSystemCharacterBase* pChar = Cast<AWeaponSystemCharacterBase>(HitActor);
@@ -252,9 +252,10 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
     }
 }
 
-void UWeaponManagerComponent::IsAimedAtInt(bool& IsAimedAtTarget)
+void UWeaponManagerComponent::IsAimedAt(bool& IsAimedAtTarget, FHitResult& HitResult)
 {
     IsAimedAtTarget = isHit;
+    HitResult = MyHitResult;
 }
 
 void UWeaponManagerComponent::ProjectileFired(class AActor* ProjectileActor)

@@ -134,7 +134,7 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
 
         KBP_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-//            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) STARTED ..."));
+            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) STARTED ..."));
             UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StartShooting(EWeaponFunction::Secondary);
 //            ActivateWeapon(PrimaryShootKey, WeaponDefinition->WeaponID);

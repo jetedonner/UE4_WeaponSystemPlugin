@@ -10,6 +10,6 @@
 
 UDevHelper::UDevHelper()
 {
-    //SaveConfig();
+    SaveConfig();
     LoadConfig();
 }

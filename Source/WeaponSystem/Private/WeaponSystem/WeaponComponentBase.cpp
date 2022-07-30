@@ -18,8 +18,8 @@ UWeaponComponentBase::UWeaponComponentBase()
     bAllowReregistration = true;
     bAutoRegister = true;
     
-    SaveConfig();
-    LoadConfig();
+//    SaveConfig();
+//    LoadConfig();
 }
 
 UWeaponComponentBase::UWeaponComponentBase(const FObjectInitializer& ObjectInitializer /*= FObjectInitializer::Get()*/)
@@ -33,8 +33,8 @@ UWeaponComponentBase::UWeaponComponentBase(const FObjectInitializer& ObjectIniti
     bAllowReregistration = true;
     bAutoRegister = true;
     
-    SaveConfig();
-    LoadConfig();
+//    SaveConfig();
+//    LoadConfig();
 }
 
 // Called when the game starts
@@ -84,7 +84,7 @@ void UWeaponComponentBase::OnStartedShooting_Implementation(EWeaponFunction Weap
     Handled = true;
     
     UDbg::DbgMsg(FString::Printf(TEXT("UWeaponComponentBase::OnStartedShooting_Implementation")), 5.0f, FColor::Purple);
-    ExecFireShot(WeaponFunction);
+    ExecFireShotNG(WeaponFunction);
 }
 
 void UWeaponComponentBase::OnStoppedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled){
@@ -116,6 +116,54 @@ void UWeaponComponentBase::GetMuzzleRotationInt(FRotator& MuzzleRotationRet, FVe
     MuzzleOffset.Set(0.0f, 0.0f, 0.0f);
     MuzzleLocRet = CameraLoc + FTransform(CameraRot).TransformVector(MuzzleOffset);
     MuzzleRotationRet = CameraRot;
+}
+
+void UWeaponComponentBase::ExecFireShotNG(EWeaponFunction WeaponFunction)
+{
+    FVector  MyMuzzleLocation;
+    FRotator MyMuzzleRotation;
+    
+    GetMuzzleRotationInt(MyMuzzleRotation, MyMuzzleLocation);
+    
+    AActor* ActorRef = GetWorld()->GetFirstPlayerController()->GetPawn();
+    FActorSpawnParameters SpawnParams;
+    SpawnParams.Owner = ActorRef;
+    SpawnParams.Instigator = ActorRef->GetInstigator();
+    SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+    
+    if(WeaponFunction == EWeaponFunction::Primary)
+    {
+//        return;
+    }
+    else
+    {
+        
+        AWeaponSystemProjectileBase* SpawnedRef = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(WeaponDefinition()->SecondaryWeaponFunctionDefinition.Projectile, MyMuzzleLocation, MyMuzzleRotation, SpawnParams);
+        
+        UDbg::DbgMsg(FString::Printf(TEXT("UWeaponComponentBase: -> SpawnActor Vector: %s"), *MyMuzzleLocation.ToString()), 5.0f, FColor::Red);
+        
+        if(SpawnedRef)
+        {
+//            FVector origin;
+//            FVector boxExtent;
+//            SpawnedRef->GetActorBounds(false, origin, boxExtent);
+            
+            FVector LaunchDirection = MyMuzzleRotation.Vector();
+            SpawnedRef->OnProjectileHitDelegate.AddDynamic(this, &UWeaponComponentBase::ProjectileHit);
+            bool WasHandled = false;
+            SpawnedRef->FireInDirection(LaunchDirection, WasHandled);
+            if(!WasHandled)
+            {
+                this->OnProjectileFireDelegate.Broadcast(SpawnedRef);
+                //UDbg::DbgMsg(FString::Printf(TEXT("FireInDirection => HANDLED!!!")), 5.0f, FColor::Green);
+            }
+            else
+            {
+                UDbg::DbgMsg(FString::Printf(TEXT("FireInDirection => NOT HANDLED!!!")), 5.0f, FColor::Green);
+                SpawnedRef->Destroy();
+            }
+        }
+    }
 }
 
 void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
@@ -152,7 +200,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     
     if(WeaponFunction == EWeaponFunction::Secondary)
     {
-        return;
+//        return;
     }
 //        
 ////        AWeaponSystemProjectileBase* SpawnedRefSecLoc = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocation, CameraRot, SpawnParams);

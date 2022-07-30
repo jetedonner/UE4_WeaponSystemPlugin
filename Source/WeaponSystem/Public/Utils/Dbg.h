@@ -23,7 +23,7 @@ class WEAPONSYSTEM_API UDbg : public UBlueprintFunctionLibrary
 	
 public:
     
-    UFUNCTION(BlueprintCallable, Category="Debug")
+    UFUNCTION(BlueprintCallable, Category="Debug", meta=(DevelopmentOnly))
     static void DbgMsg(const FString& DebugMessage, float Duration = 5.f, FColor TextColor = FColor::Red, const bool ConsoleOnly = false);
     
 };
