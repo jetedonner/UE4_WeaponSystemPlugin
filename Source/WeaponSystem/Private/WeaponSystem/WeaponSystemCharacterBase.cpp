@@ -217,6 +217,7 @@ void AWeaponSystemCharacterBase::ActivateWeapon(FKey Param, int32 WeaponID)
 
 void AWeaponSystemCharacterBase::ProjectileHit(class AActor* ProjectileActor, class AActor* OtherActor, const FVector Location)
 {
+    UDbg::DbgMsg(FString(TEXT("AWeaponSystemCharacterBase::ProjectileHit!!!")), 5.0f, FColor::Yellow);
     AWeaponSystemCharacterBase* OtherCharacter = Cast<AWeaponSystemCharacterBase>(OtherActor);
     if(OtherCharacter)
     {
@@ -248,6 +249,7 @@ void AWeaponSystemCharacterBase::TickTimeline()
 
 void AWeaponSystemCharacterBase::OnReceivedAnyDamage(float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser)
 {
+    UDbg::DbgMsg(FString(TEXT("AWeaponSystemCharacterBase::OnReceivedAnyDamage!!!")), 5.0f, FColor::Yellow);
     if(HealthManagerComponent)
     {
         Cast<UFloatingHealthBarWidget>(FloatingHealthBar->GetUserWidgetObject())->Health = HealthManagerComponent->Health;
@@ -268,6 +270,7 @@ void AWeaponSystemCharacterBase::OnReceivedAnyDamage(float Damage, const class U
 
 void AWeaponSystemCharacterBase::OnTakeAnyDamageNG(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser)
 {
+    UDbg::DbgMsg(FString(TEXT("AWeaponSystemCharacterBase::OnTakeAnyDamageNG!!!")), 5.0f, FColor::Yellow);
     if(HealthManagerComponent)
     {
         if(!this->HealthManagerComponent->Died)
@@ -287,6 +290,7 @@ void AWeaponSystemCharacterBase::OnTakeAnyDamageNG(AActor* DamagedActor, float D
 
 void AWeaponSystemCharacterBase::OnActorGotHit_Implementation(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
+    UDbg::DbgMsg(FString(TEXT("AWeaponSystemCharacterBase::OnActorGotHit_Implementation!!!")), 5.0f, FColor::Yellow);
     if(HealthManagerComponent)
     {
         if(this->HealthManagerComponent->Died)
