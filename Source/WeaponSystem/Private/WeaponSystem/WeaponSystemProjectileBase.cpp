@@ -66,7 +66,6 @@ void AWeaponSystemProjectileBase::FireInDirection(const FVector& ShootDirection,
     if(OnProjectileCustomFireDelegate.IsBound())
     {
         UDbg::DbgMsg(FString::Printf(TEXT("OnProjectileCustomFireDelegate.IsBound()")), 5.0f, FColor::Red);
-        // Hello stay your man and wait for it!!!
         this->OnProjectileCustomFireDelegate.Broadcast(this, ShootDirection);
         WasHandled = true;
     }
@@ -125,30 +124,26 @@ void AWeaponSystemProjectileBase::OnHit(UPrimitiveComponent* HitComponent, AActo
         
         UGameplayStatics::ApplyDamage(OtherActor, WeaponTypeDef.DataTable->FindRow<FWeaponDefinition>(WeaponTypeDef.RowName, "")->DamageFactor, GetWorld()->GetFirstPlayerController(), this, UDamageType::StaticClass());
         
-//        this->OnProjectileHitDelegate.Broadcast(this, OtherActor, Hit.Location);
-        
         if(ImpactDecalMaterialStructs.Num() > 0)
         {
             int32 Idx = FMath::RandRange(0, ImpactDecalMaterialStructs.Num() - 1);
             
-            UMaterialInterface* Decal = Cast<UMaterialInterface>(ImpactDecalMaterialStructs[Idx].ImpactDecalMaterial);
+            FDecalStruct ImpactDecalDefinition = ImpactDecalMaterialStructs[Idx];
+            UMaterialInterface* Decal = Cast<UMaterialInterface>(ImpactDecalDefinition.ImpactDecalMaterial);
             
-            FVector DecalSize = ImpactDecalMaterialStructs[Idx].DecalSize;
             FVector DecalLocation = Hit.ImpactPoint;
             
             FRotator RandomDecalRotation = UKismetMathLibrary::MakeRotFromX(Hit.ImpactNormal);
             RandomDecalRotation.Roll += FMath::RandRange(-180.0f, 180.0f);
             
-            float RandDecalLifeSpan = FMath::RandRange(DecalLifeSpanMin, DecalLifeSpanMax);
+            float RandDecalLifeSpan = FMath::RandRange(ImpactDecalDefinition.DecalLifeSpanMin, ImpactDecalDefinition.DecalLifeSpanMax);
             
-            ImpactDecalObject = UGameplayStatics::SpawnDecalAttached(Decal, DecalSize, OtherComp, "", DecalLocation, RandomDecalRotation, EAttachLocation::KeepWorldPosition, RandDecalLifeSpan);
+            ImpactDecalObject = UGameplayStatics::SpawnDecalAttached(Decal, ImpactDecalDefinition.DecalSize, OtherComp, "", DecalLocation, RandomDecalRotation, EAttachLocation::KeepWorldPosition, RandDecalLifeSpan);
             
-            if(DecalFadeOutEffect)
+            if(ImpactDecalDefinition.DecalFadeOutEffect)
             {
-                ImpactDecalObject->SetFadeOut(RandDecalLifeSpan - DecalFadeOutDuration, DecalFadeOutDuration, false);
+                ImpactDecalObject->SetFadeOut(RandDecalLifeSpan - ImpactDecalDefinition.DecalFadeOutDuration, ImpactDecalDefinition.DecalFadeOutDuration, false);
             }
-//            ImpactDecalObject->SetFadeScreenSize(0.00001f);
-//            ImpactDecalObject->FadeScreenSize = 0.00001f;
         }
         
         this->OnProjectileHitDelegate.Broadcast(this, OtherActor, Hit.Location);

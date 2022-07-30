@@ -72,22 +72,6 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     FWeaponFunctionDefinition SecondaryWeaponFunctionDefinition = FWeaponFunctionDefinition(EWeaponFunction::Secondary);
     
-//    SecondaryWeaponFunctionDefinition->WeaponFunction = EWeaponFunction::Secondary;
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    TSubclassOf<AWeaponSystemProjectileBase> Projectile;
-
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    class UCrosshairUserWidgetBase* CrosshairUserWidgetNG;
-    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    UMaterialInterface* CrosshairMaterial;
-    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    UCrosshairUserWidgetBase* CrosshairUserWidget;
-    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    bool TesetVarForTeset = true;
-    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     TSubclassOf<class UUserWidget> CrosshairUserWidget;
 };

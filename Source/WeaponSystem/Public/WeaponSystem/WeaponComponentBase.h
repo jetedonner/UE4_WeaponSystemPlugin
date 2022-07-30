@@ -10,23 +10,13 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-//#include "WeaponDefinition.h"
 #include "WeaponSystemProjectileBase.h"
 #include "TimerManager.h"
 #include "Components/AudioComponent.h"
 #include "WeaponComponentBase.generated.h"
 
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_RetVal_OneParam(bool, FWeaponStartedShootingDelegate, EWeaponFunction, WeaponFunction);
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FProjectileFireDelegate, AActor*, ProjectileActor);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponStoppedShootingDelegate, UWeaponComponentBase*, WeaponComponent);
-
-//UENUM(BlueprintType)
-//enum class EWeaponFunction : uint8
-//{
-//    Primary                 UMETA(DisplayName = "Primary weapon function"),
-//    Secondary               UMETA(DisplayName = "Secondary weapon function"),
-//};
 
 UCLASS(Blueprintable)
 class WEAPONSYSTEM_API UWeaponComponentBase : public UActorComponent
@@ -36,42 +26,19 @@ class WEAPONSYSTEM_API UWeaponComponentBase : public UActorComponent
 public:
     
 	UWeaponComponentBase();
-
     UWeaponComponentBase(const FObjectInitializer& ObjectInitializer);
     
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float PluginExampleVariable = 123.456f;
-//
-//    UPROPERTY(Config, EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float ExampleVar;
 
 protected:
 
 	virtual void BeginPlay() override;
     
-    
-    
-//    FVec GetMuzzleRotation();
-
 public:
     
     
     
     FTimerHandle ReloadingEndTimerHandle;
     FTimerHandle ReloadingStartTimerHandle;
-
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float ExampleTestNG;
-//
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float KimsVar = 123.0f;
-//
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float JeteSCHOICEReload = 123.0f;
-//
-//
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float ANOTHERTestVar = 123.0f;
     
     UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
     void SetIsReloading(const bool NewVal)
@@ -155,12 +122,9 @@ public:
     
     FWeaponDefinition* WeaponDefinition();
 
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    FVector MuzzleOffset;
-    
     UPROPERTY()//EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     TSubclassOf<AWeaponSystemProjectileBase> Projectile;
-    
+
     UPROPERTY()//EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     TSubclassOf<AWeaponSystemProjectileBase> ProjectileSecondary;
 		
@@ -196,14 +160,8 @@ public:
 
     void OnStartedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled);
     
-//    UFUNCTION(BlueprintImplementableEvent, Category="Weapon System")
-//    void OnStartShooting(EWeaponFunction WeaponFunction, bool& Handled);
-    
     UFUNCTION(BlueprintNativeEvent, Category="Weapon System")
     void OnStoppedShooting(EWeaponFunction WeaponFunction, bool& Handled);
 
     void OnStoppedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled);
-    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    bool TesetVarForTeset = true;
 };

@@ -13,9 +13,6 @@
 #include "Materials/MaterialInterface.h"
 #include "DecalStruct.generated.h"
 
-/**
- *  Decal Definitions
- */
 USTRUCT(Blueprintable)
 struct FDecalStruct
 {
@@ -29,4 +26,15 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     UMaterialInterface* ImpactDecalMaterial;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System|Decal", meta=(ClampMin="2.5"))
+    float DecalLifeSpanMin = 5.0f;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System|Decal")
+    float DecalLifeSpanMax = 15.0f;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System|Decal")
+    bool DecalFadeOutEffect = true;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System|Decal", meta=(EditCondition="DecalFadeOutEffect"))
+    float DecalFadeOutDuration = 2.5f;
 };
