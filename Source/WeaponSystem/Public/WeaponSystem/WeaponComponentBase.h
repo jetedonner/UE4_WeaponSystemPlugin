@@ -158,10 +158,10 @@ public:
 //    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
 //    FVector MuzzleOffset;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    UPROPERTY()//EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     TSubclassOf<AWeaponSystemProjectileBase> Projectile;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    UPROPERTY()//EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     TSubclassOf<AWeaponSystemProjectileBase> ProjectileSecondary;
 		
     UFUNCTION(BlueprintCallable, Category="Weapon System")
@@ -201,6 +201,6 @@ public:
 
     void OnStoppedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled);
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    bool TesetVarForTeset = true;
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    bool TesetVarForTeset = true;
 };

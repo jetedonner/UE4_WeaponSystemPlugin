@@ -71,6 +71,7 @@ void UWeaponComponentBase::GetWeaponDefinition(FWeaponDefinition& WeaponDef)
 
 void UWeaponComponentBase::FireShot(EWeaponFunction WeaponFunction)
 {
+    UDbg::DbgMsg(FString::Printf(TEXT("UWeaponComponentBase::FireShot")), 5.0f, FColor::Red);
     this->CurrentWeaponFunction = WeaponFunction;
     bool Handled = false;
     this->OnStartedShooting(WeaponFunction, Handled);
@@ -134,6 +135,7 @@ void UWeaponComponentBase::ExecFireShotNG(EWeaponFunction WeaponFunction)
     if(WeaponFunction == EWeaponFunction::Primary)
     {
 //        return;
+        ExecFireShot(WeaponFunction);
     }
     else
     {
