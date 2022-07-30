@@ -22,7 +22,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponReloadingDelegate, UWeaponComponentBase*, WeaponActorComponent);
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class WEAPONSYSTEM_API UWeaponManagerComponent : public USceneComponent
 {
 	GENERATED_BODY()
@@ -176,4 +176,7 @@ public:
     
     UPROPERTY(BlueprintAssignable, Category="Weapon System")
     FWeaponStoppedShootingDelegate OnWeaponStoppedShootingDelegate;
+    
+//    UFUNCTION(BlueprintImplementableEvent,  Category = "Weapon System")
+//    void OnChangeWeapon(int32 WeaponID);
 };

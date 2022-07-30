@@ -75,6 +75,7 @@ void UWeaponComponentBase::FireShot(EWeaponFunction WeaponFunction)
     this->CurrentWeaponFunction = WeaponFunction;
     bool Handled = false;
     this->OnStartedShooting(WeaponFunction, Handled);
+//    this->OnStartShooting(WeaponFunction, Handled);
     if(!Handled)
     {
         ExecFireShot(WeaponFunction);

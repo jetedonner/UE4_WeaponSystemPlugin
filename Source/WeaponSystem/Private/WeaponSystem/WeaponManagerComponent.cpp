@@ -246,6 +246,7 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
 //                {
 //                    GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrentWeapon->WeaponDefinition()->Cadence, true, 0.0f);
 //                }
+//                this->OnChangeWeapon(WeaponID);
                 break;
             }
         }

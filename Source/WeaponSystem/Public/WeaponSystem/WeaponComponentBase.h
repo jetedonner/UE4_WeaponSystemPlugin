@@ -196,6 +196,9 @@ public:
 
     void OnStartedShooting_Implementation(EWeaponFunction WeaponFunction, bool& Handled);
     
+//    UFUNCTION(BlueprintImplementableEvent, Category="Weapon System")
+//    void OnStartShooting(EWeaponFunction WeaponFunction, bool& Handled);
+    
     UFUNCTION(BlueprintNativeEvent, Category="Weapon System")
     void OnStoppedShooting(EWeaponFunction WeaponFunction, bool& Handled);
 

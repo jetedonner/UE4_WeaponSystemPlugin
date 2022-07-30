@@ -62,6 +62,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     UWeaponManagerComponent* WeaponManagerComponent;
     
+    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
+    UWeaponComponentBase* GetCurrentWeapon() {
+        return WeaponManagerComponent->CurrentWeapon;
+    }
+    
+    UPROPERTY(BlueprintGetter=GetCurrentWeapon, Category="Weapon System")
+    UWeaponComponentBase* CurrentWeapon;
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health System")
     UHealthManagerComponent* HealthManagerComponent;
     
