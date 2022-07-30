@@ -12,9 +12,6 @@
 #include "Blueprint/UserWidget.h"
 #include "CrosshairUserWidgetBase.generated.h"
 
-/**
- * 
- */
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCrosshairAnimationDelegate, bool, AlternativeAnimation);
 
 UCLASS()
@@ -29,14 +26,14 @@ protected:
     
 public:
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
-    FLinearColor Tint = FLinearColor::Red;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
-    bool bAntiAlias = true;
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
-    float Thickness = 3.0f;
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
+//    FLinearColor Tint = FLinearColor::Red;
+//
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
+//    bool bAntiAlias = true;
+//
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Cross Crosshair", Interp, meta = (BindWidget))
+//    float Thickness = 3.0f;
     
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Weapon System")
     void OnAnimateCrosshair(bool AlternativeAnimation = false);
@@ -62,5 +59,4 @@ protected:
 
     void FillAnimationsMap();
     
-    void DrawLine(FPaintContext Context, FVector2D PositionA, FVector2D PositionB) const;
 };

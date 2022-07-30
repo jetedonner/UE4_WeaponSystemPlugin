@@ -97,7 +97,7 @@ void UCrosshairUserWidgetBase::PlayAimedAtAnimation(bool AlternativeAnimation)
     PlayAnimationByName(AimedAnimationName, 0.0f, 1, PlayMode, 1.0f);
 }
 
-void UCrosshairUserWidgetBase::DrawLine(FPaintContext Context, FVector2D PositionA, FVector2D PositionB) const
-{
-    UWidgetBlueprintLibrary::DrawLine(Context, PositionA, PositionB, Tint, bAntiAlias, Thickness);
-}
+//void UCrosshairUserWidgetBase::DrawLine(FPaintContext Context, FVector2D PositionA, FVector2D PositionB) const
+//{
+//    UWidgetBlueprintLibrary::DrawLine(Context, PositionA, PositionB, Tint, bAntiAlias, Thickness);
+//}

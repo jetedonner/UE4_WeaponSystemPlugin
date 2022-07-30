@@ -10,8 +10,6 @@
 
 void UCrossCrosshairUserWidget::NativeConstruct()
 {
-    FillAnimationsMap();
-    
     Super::NativeConstruct();
     
     FVector2D MySize = FVector2D(InitSize, InitSize);

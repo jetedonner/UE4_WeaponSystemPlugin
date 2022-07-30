@@ -10,7 +10,7 @@
 
 void UCircleCrosshairUserWidget::NativeConstruct()
 {
-    FillAnimationsMap();
+//    FillAnimationsMap();
     
     Super::NativeConstruct();
     

@@ -10,7 +10,7 @@
 
 void UChevronsCrosshairUserWidget::NativeConstruct()
 {
-    FillAnimationsMap();
+//    FillAnimationsMap();
     
     Super::NativeConstruct();
     

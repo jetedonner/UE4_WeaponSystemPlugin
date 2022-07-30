@@ -9,18 +9,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SceneManagement.h"
-#include "Kismet/KismetMathLibrary.h"
-#include "Blueprint/WidgetBlueprintLibrary.h"
-#include "Math/Color.h"
-#include "Math/Vector2D.h"
-#include "Widgets/Layout/Anchors.h"
-#include "Blueprint/UserWidget.h"
-#include "WeaponSystem/Crosshair/CrosshairUserWidgetBase.h"
+#include "WeaponSystem/Crosshair/DrawUserWidgetBase.h"
 #include "ChevronsCrosshairUserWidget.generated.h"
 
 UCLASS()
-class WEAPONSYSTEM_API UChevronsCrosshairUserWidget : public UCrosshairUserWidgetBase
+class WEAPONSYSTEM_API UChevronsCrosshairUserWidget : public UDrawUserWidgetBase
 {
 	GENERATED_BODY()
     

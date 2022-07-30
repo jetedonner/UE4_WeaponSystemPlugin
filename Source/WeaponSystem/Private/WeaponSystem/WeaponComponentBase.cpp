@@ -200,7 +200,7 @@ void UWeaponComponentBase::ExecFireShot(EWeaponFunction WeaponFunction)
     
     if(WeaponFunction == EWeaponFunction::Secondary)
     {
-//        return;
+        return;
     }
 //        
 ////        AWeaponSystemProjectileBase* SpawnedRefSecLoc = (AWeaponSystemProjectileBase*) GetWorld()->SpawnActor<AWeaponSystemProjectileBase>(ProjectileSecondary, MuzzleLocation, CameraRot, SpawnParams);
