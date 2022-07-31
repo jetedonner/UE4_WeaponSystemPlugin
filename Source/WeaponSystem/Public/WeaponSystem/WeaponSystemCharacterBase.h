@@ -76,9 +76,6 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Score System")
     UScoreManagerComponent* ScoreManagerComponent;
     
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Score System")
-//    class UUserWidget* FloatingHealthBar;
-    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Score System")
     float HitScore = 250.0f;
     
