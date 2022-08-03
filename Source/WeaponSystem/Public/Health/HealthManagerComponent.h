@@ -11,6 +11,9 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "GameFramework/Character.h"
+#include "Utils/Dbg.h"
+//#include "WeaponSystem/WeaponSystemProjectileBase.h"
 #include "HealthManagerComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FReceivedAnyDamageDelegate, float, Damage, const class UDamageType*, DamageType, class AController*, InstigatedBy, AActor*, DamageCauser);
@@ -52,4 +55,11 @@ public:
     
     UFUNCTION(BlueprintCallable, Category="Health System")
     void ApplyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+    
+    virtual void Activate(bool bReset /* = false */) override;
+    
+    UFUNCTION(BlueprintCallable, Category="Weapon System")
+    void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+//    FActorComponentActivatedSignature OnComponentActivatedImpl;
+//    virtual void OnComponentActivated() override;
 };
