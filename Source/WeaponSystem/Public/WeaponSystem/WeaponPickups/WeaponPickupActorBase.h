@@ -30,6 +30,8 @@ public:
 	AWeaponPickupActorBase();
     AWeaponPickupActorBase(const FObjectInitializer& ObjectInitializer);
     
+    void SetPickUpCount();
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon System")
     class UStaticMeshComponent* StaticMeshComponent;
     

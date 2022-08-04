@@ -64,9 +64,26 @@ FWeaponDefinition* UWeaponComponentBase::WeaponDefinition()
     return WeaponTypeDef.DataTable->FindRow<FWeaponDefinition>(WeaponTypeDef.RowName, "");
 }
 
+FWeaponFunctionDefinition UWeaponComponentBase::WeaponFunctionDefinition()
+{
+    if(CurrentWeaponFunction == EWeaponFunction::Primary)
+    {
+        return WeaponDefinition()->PrimaryWeaponFunctionDefinition;
+    }
+    else
+    {
+        return WeaponDefinition()->SecondaryWeaponFunctionDefinition;
+    }
+}
+
 void UWeaponComponentBase::GetWeaponDefinition(FWeaponDefinition& WeaponDef)
 {
     WeaponDef = *this->WeaponDefinition();
+}
+
+void UWeaponComponentBase::GetWeaponFunctionDefinition(FWeaponFunctionDefinition& WeaponFuncDef)
+{
+    WeaponFuncDef = this->WeaponFunctionDefinition();
 }
 
 void UWeaponComponentBase::FireShot(EWeaponFunction WeaponFunction)

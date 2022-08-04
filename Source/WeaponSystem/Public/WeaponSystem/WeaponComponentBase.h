@@ -121,6 +121,11 @@ public:
     void GetWeaponDefinition(FWeaponDefinition& WeaponDef);
     
     FWeaponDefinition* WeaponDefinition();
+    
+    UFUNCTION(BlueprintCallable, Category="Weapon System")
+    void GetWeaponFunctionDefinition(FWeaponFunctionDefinition& WeaponFuncDef);
+    
+    FWeaponFunctionDefinition WeaponFunctionDefinition();
 
     UPROPERTY()//EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     TSubclassOf<AWeaponSystemProjectileBase> Projectile;

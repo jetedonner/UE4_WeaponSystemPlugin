@@ -8,18 +8,19 @@ AWeaponPickupActorBase::AWeaponPickupActorBase()
 {
     PrimaryActorTick.bCanEverTick = true;
     
-    if(PickUpCount == 0)
-    {
-        if(!WeaponType.IsNull())
-        {
-            FWeaponDefinition* MyWeaponDefinition = WeaponType.GetRow<FWeaponDefinition>("");
-            
-            if(MyWeaponDefinition)
-            {
-                PickUpCount = MyWeaponDefinition->PickUpCount;
-            }
-        }
-    }
+    SetPickUpCount();
+//    if(PickUpCount == 0)
+//    {
+//        if(!WeaponType.IsNull())
+//        {
+//            FWeaponDefinition* MyWeaponDefinition = WeaponType.GetRow<FWeaponDefinition>("");
+//
+//            if(MyWeaponDefinition)
+//            {
+//                PickUpCount = MyWeaponDefinition->PickUpCount;
+//            }
+//        }
+//    }
 }
 
 AWeaponPickupActorBase::AWeaponPickupActorBase(const FObjectInitializer& ObjectInitializer) {
@@ -62,6 +63,24 @@ AWeaponPickupActorBase::AWeaponPickupActorBase(const FObjectInitializer& ObjectI
         RotatingMovement->RotationRate = RotationRate;
     }
     
+    SetPickUpCount();
+    
+//    if(PickUpCount == 0)
+//    {
+//        if(!WeaponType.IsNull())
+//        {
+//            FWeaponDefinition* MyWeaponDefinition = WeaponType.GetRow<FWeaponDefinition>("");
+//
+//            if(MyWeaponDefinition)
+//            {
+//                PickUpCount = MyWeaponDefinition->PickUpCount;
+//            }
+//        }
+//    }
+}
+
+void AWeaponPickupActorBase::SetPickUpCount()
+{
     if(PickUpCount == 0)
     {
         if(!WeaponType.IsNull())
@@ -85,18 +104,18 @@ void AWeaponPickupActorBase::BeginPlay()
     
     CollisionSphere->OnComponentHit.AddDynamic(this, &AWeaponPickupActorBase::OnHit);
     
-    if(PickUpCount == 0)
-    {
-        if(!WeaponType.IsNull())
-        {
-            FWeaponDefinition* MyWeaponDefinition = WeaponType.GetRow<FWeaponDefinition>("");
-            
-            if(MyWeaponDefinition)
-            {
-                PickUpCount = MyWeaponDefinition->PickUpCount;
-            }
-        }
-    }
+//    if(PickUpCount == 0)
+//    {
+//        if(!WeaponType.IsNull())
+//        {
+//            FWeaponDefinition* MyWeaponDefinition = WeaponType.GetRow<FWeaponDefinition>("");
+//            
+//            if(MyWeaponDefinition)
+//            {
+//                PickUpCount = MyWeaponDefinition->PickUpCount;
+//            }
+//        }
+//    }
     
     Super::BeginPlay();
 }

@@ -45,9 +45,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     int32 PickUpCount = 30;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-    float Cadence = 1.0;
-    
+//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+//    float Cadence = 1.0;
+//    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     float ReloadTimeout = 1.0;
     
@@ -70,6 +70,9 @@ public:
     FWeaponFunctionDefinition PrimaryWeaponFunctionDefinition;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    bool HasSecondaryFunction = true;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System", meta=(EditCondition="HasSecondaryFunction"))
     FWeaponFunctionDefinition SecondaryWeaponFunctionDefinition = FWeaponFunctionDefinition(EWeaponFunction::Secondary);
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")

@@ -11,15 +11,12 @@
 UHealthManagerComponent::UHealthManagerComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-    
-    //UDbg::DbgMsg(FString::Printf(TEXT("ADDDIUNG HEALTH MGR TO ACTOOOOOOOOR => %s"), *GetOwner()->GetName()), 5.0f, FColor::Red);
 }
 
 void UHealthManagerComponent::Activate(bool bReset /* = false */)
 {
     Super::Activate(bReset);
-    UDbg::DbgMsg(FString::Printf(TEXT("ADDDIUNG HEALTH MGR TO ACTOOOOOOOOR => %s"), *GetOwner()->GetName()), 5.0f, FColor::Red);
-    
+//    UDbg::DbgMsg(FString::Printf(TEXT("ADDDIUNG HEALTH MGR TO ACTOOOOOOOOR => %s"), *GetOwner()->GetName()), 5.0f, FColor::Red);
     ACharacter* OwnerCharacter = Cast<ACharacter>(GetOwner());
     if(OwnerCharacter)
     {
@@ -29,7 +26,7 @@ void UHealthManagerComponent::Activate(bool bReset /* = false */)
 
 void UHealthManagerComponent::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-    UDbg::DbgMsg(FString::Printf(TEXT("OnHit OnHit OnHit OnHit OnHit OnHit OnHit => %s"), *GetOwner()->GetName()), 15.0f, FColor::Purple);
+//    UDbg::DbgMsg(FString::Printf(TEXT("OnHit OnHit OnHit OnHit OnHit OnHit OnHit => %s"), *GetOwner()->GetName()), 15.0f, FColor::Purple);
     
 //    AWeaponSystemProjectileBase* ProjectileBase = Cast<AWeaponSystemProjectileBase>(OtherActor);
 //    if(ProjectileBase)
@@ -37,12 +34,10 @@ void UHealthManagerComponent::OnHit(UPrimitiveComponent* HitComponent, AActor* O
 //        OwnerCharacter->GetMesh()->OnComponentHit.AddDynamic(this, &UHealthManagerComponent::OnHit);
         //ApplyDamage(GetOwner(), 5);
         float NewHealth = 0.0f;
-        DecreaseHealth(15.0f, NewHealth);
+        DecreaseHealth(2.0f, NewHealth);
     
     UDbg::DbgMsg(FString::Printf(TEXT("NEeeeeeeeeeeeeeeeWWWWWWWWW HHHHHHHEEEEEAAALLLLHHHHTTTTT => %f"), NewHealth), 15.0f, FColor::Purple);
 //    }
-    //this->ExecActorHitHandler(OtherActor, Hit);
-    //this->OnComponentGotHit(HitComponent, OtherActor, NormalImpulse, Hit);
 }
 
 void UHealthManagerComponent::BeginPlay()
@@ -59,9 +54,6 @@ void UHealthManagerComponent::ApplyDamage(AActor* DamagedActor, float Damage, co
 {
     float NewHealth = 0.0f;
     DecreaseHealth(Damage, NewHealth);
-    
-//    UE_LOG(LogTemp, Warning, TEXT("UHealthManagerComponent::ApplyDamageNG: NewHealth: %f"), Health);
-    
     this->OnReceivedAnyDamageDelegate.Broadcast(Damage, DamageType, InstigatedBy, DamageCauser);
 }
 
