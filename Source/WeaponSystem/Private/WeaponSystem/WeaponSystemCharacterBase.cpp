@@ -17,8 +17,6 @@ AWeaponSystemCharacterBase::AWeaponSystemCharacterBase(const FObjectInitializer&
 {
     PrimaryActorTick.bCanEverTick = true;
     
-//    UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase::AWeaponSystemCharacterBase() WITH ObjectInitializer !!!"));
-    
     if(!WeaponManagerComponent)
     {
         WeaponManagerComponent = ObjectInitializer.CreateDefaultSubobject<UWeaponManagerComponent>(this, TEXT("Weapon Manager Component"));
@@ -82,7 +80,6 @@ void AWeaponSystemCharacterBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-// Called to bind functionality to input
 void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
     Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -95,8 +92,6 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
     }
     else
     {
-//        UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase->WeaponManagerComponent IS setup ..."));
-        
         const FKey PrimaryShootKey = WeaponManagerComponent->PrimaryShootKey;
         
         FInputKeyBinding KBP_PrimaryShootKey(FInputChord(PrimaryShootKey, false, false, false, false), EInputEvent::IE_Pressed);
@@ -105,10 +100,8 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
 
         KBP_PrimaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-//            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (primary) STARTED ..."));
 //            UDbg::DbgMsg(FString(TEXT("SHOOTING PRIMARY!!!")), 5.0f, FColor::Orange);
             WeaponManagerComponent->StartShooting();
-//            ActivateWeapon(PrimaryShootKey, WeaponDefinition->WeaponID);
         });
         PlayerInputComponent->KeyBindings.Add(KBP_PrimaryShootKey);
         
@@ -119,10 +112,8 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBR_PrimaryShootKey.bExecuteWhenPaused = false;
         KBR_PrimaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-//            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (primary) ENDED ..."));
 //            UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED PRIMARY!!!")), 5.0f, FColor::Orange);
             WeaponManagerComponent->StopShooting();
-//            Delegate.ExecuteIfBound(Key, false);
         });
         InputComponent->KeyBindings.Add(KBR_PrimaryShootKey);
         
@@ -134,10 +125,8 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
 
         KBP_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) STARTED ..."));
-            UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY!!!")), 5.0f, FColor::Yellow);
+//            UDbg::DbgMsg(FString(TEXT("SHOOTING SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StartShooting(EWeaponFunction::Secondary);
-//            ActivateWeapon(PrimaryShootKey, WeaponDefinition->WeaponID);
         });
         PlayerInputComponent->KeyBindings.Add(KBP_SecondaryShootKey);
         
@@ -146,10 +135,8 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
         KBR_SecondaryShootKey.bExecuteWhenPaused = false;
         KBR_SecondaryShootKey.KeyDelegate.GetDelegateWithKeyForManualSet().BindLambda([=](const FKey& Key)
         {
-//            UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase => SHOOTING (secondary) ENDED ..."));
             UDbg::DbgMsg(FString(TEXT("SHOOTING ENDED SECONDARY!!!")), 5.0f, FColor::Yellow);
             WeaponManagerComponent->StopShooting();
-//            Delegate.ExecuteIfBound(Key, false);
         });
         InputComponent->KeyBindings.Add(KBR_SecondaryShootKey);
         
@@ -168,9 +155,6 @@ void AWeaponSystemCharacterBase::SetupPlayerInputComponent(UInputComponent* Play
                     
                     FString tmp = EKeys::GetKeyDetails(Key)->GetDisplayName(true).ToString();
 
-//                    UE_LOG(LogTemp, Warning, TEXT("SettingUp KeyBinding: %s => %s"), *It->GetName(), *tmp);
-                    
-                    // Listen for key pressed
                     FInputKeyBinding KBP(FInputChord(Key, false, false, false, false), EInputEvent::IE_Pressed);
                     KBP.bConsumeInput = true;
                     KBP.bExecuteWhenPaused = false;
@@ -204,7 +188,6 @@ void AWeaponSystemCharacterBase::ActivateWeapon(FKey Param, int32 WeaponID)
     }
     else
     {
-//        UE_LOG(LogTemp, Warning, TEXT("AWeaponSystemCharacterBase::ActivateWeapon: %i ..."), WeaponID);
         if(WeaponManagerComponent->CurrentWeapon->WeaponID() != WeaponID)
         {
             IsAimedAtChar = false;
@@ -231,7 +214,7 @@ void AWeaponSystemCharacterBase::ProjectileHit(class AActor* ProjectileActor, cl
 
 void AWeaponSystemCharacterBase::EffectProgress(float Value)
 {
-//    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("EffectProgress: timeline: %f value:%f"), TimeLine.GetPlaybackPosition(), Value));
+
 }
 
 void AWeaponSystemCharacterBase::TickTimeline()
@@ -243,7 +226,6 @@ void AWeaponSystemCharacterBase::TickTimeline()
     else
     {
         GetWorldTimerManager().ClearTimer(TimerHandle);
-//        SetLifeSpan(0);
     }
 }
 

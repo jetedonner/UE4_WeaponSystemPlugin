@@ -25,32 +25,25 @@
 #include "Components/TimelineComponent.h"
 #include "WeaponSystemCharacterBase.generated.h"
 
-//WidgetBlueprint'/WeaponSystem/Widgets/FloatingHealthBar.FloatingHealthBar'
-
 UCLASS()
 class WEAPONSYSTEM_API AWeaponSystemCharacterBase : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	AWeaponSystemCharacterBase();
     AWeaponSystemCharacterBase(const FObjectInitializer& ObjectInitializer);
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-//    virtual void Tick(float DeltaTime);
+    virtual void BeginPlay() override;
 
 public:
     
     FTimeline TimeLine;
     FTimerHandle TimerHandle;
-//    FTimerHandle TimerStartHandle;
     
     const float DELTATIME = 0.1f;
 
-//    void StartTimeline();
     void TickTimeline();
 
     UFUNCTION()
@@ -94,19 +87,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     class UWidgetComponent* FloatingHealthBar;
     
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
     void ActivateWeapon(FKey Param, int32 WeaponID);
     
     UFUNCTION(BlueprintCallable, Category="Weapon System")
     void ProjectileHit(class AActor* ProjectileActor, class AActor* OtherActor, const FVector Location);
-    
-//    UFUNCTION(BlueprintCallable, Category="Health System")
-//    void ApplyDamage(float Damage, bool DidDie);
     
     UFUNCTION()
     void OnReceivedAnyDamage(float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);

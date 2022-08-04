@@ -16,7 +16,6 @@ UHealthManagerComponent::UHealthManagerComponent()
 void UHealthManagerComponent::Activate(bool bReset /* = false */)
 {
     Super::Activate(bReset);
-//    UDbg::DbgMsg(FString::Printf(TEXT("ADDDIUNG HEALTH MGR TO ACTOOOOOOOOR => %s"), *GetOwner()->GetName()), 5.0f, FColor::Red);
     ACharacter* OwnerCharacter = Cast<ACharacter>(GetOwner());
     if(OwnerCharacter)
     {

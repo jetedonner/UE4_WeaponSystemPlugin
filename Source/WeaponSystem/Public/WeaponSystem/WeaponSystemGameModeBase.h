@@ -24,9 +24,6 @@ class WEAPONSYSTEM_API AWeaponSystemGameModeBase : public AGameModeBase
 public:
     AWeaponSystemGameModeBase();
     
-//    UPROPERTY(Config)
-//    bool DebugMode = true;
-    
 };
 
 

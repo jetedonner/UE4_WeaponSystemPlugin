@@ -8,15 +8,6 @@
 
 #include "WeaponSystem/Crosshair/CrosshairUserWidgetBase.h"
 
-//UCrosshairUserWidgetBase::UCrosshairUserWidgetBase():Super()
-//{
-//    
-//}
-
-//void UCrosshairUserWidgetBase::BeginPlay()
-//{
-//    Super::BeginPlay();
-//}
 
 void UCrosshairUserWidgetBase::NativeConstruct()
 {
@@ -36,19 +27,14 @@ void UCrosshairUserWidgetBase::FillAnimationsMap()
     
     FProperty* Prop = GetClass()->PropertyLink;
 
-    // Run through all properties of this class to find any widget animations
     while (Prop != nullptr)
     {
-        // Only interested in object properties
         if (Prop->GetClass() == FObjectProperty::StaticClass())
         {
             FObjectProperty* ObjProp = CastField<FObjectProperty>(Prop);
-
-            // Only want the properties that are widget animations
             if (ObjProp->PropertyClass == UWidgetAnimation::StaticClass())
             {
                 UObject* Obj = ObjProp->GetObjectPropertyValue_InContainer(this);
-
                 UWidgetAnimation* WidgetAnim = Cast<UWidgetAnimation>(Obj);
 
                 if (WidgetAnim != nullptr && WidgetAnim->MovieScene != nullptr)
@@ -96,8 +82,3 @@ void UCrosshairUserWidgetBase::PlayAimedAtAnimation(bool AlternativeAnimation)
     EUMGSequencePlayMode::Type PlayMode = (AlternativeAnimation ? EUMGSequencePlayMode::Forward : EUMGSequencePlayMode::Reverse);
     PlayAnimationByName(AimedAnimationName, 0.0f, 1, PlayMode, 1.0f);
 }
-
-//void UCrosshairUserWidgetBase::DrawLine(FPaintContext Context, FVector2D PositionA, FVector2D PositionB) const
-//{
-//    UWidgetBlueprintLibrary::DrawLine(Context, PositionA, PositionB, Tint, bAntiAlias, Thickness);
-//}

@@ -17,9 +17,6 @@ UWeaponComponentBase::UWeaponComponentBase()
     bAutoActivate = true;
     bAllowReregistration = true;
     bAutoRegister = true;
-    
-//    SaveConfig();
-//    LoadConfig();
 }
 
 UWeaponComponentBase::UWeaponComponentBase(const FObjectInitializer& ObjectInitializer /*= FObjectInitializer::Get()*/)
@@ -32,9 +29,6 @@ UWeaponComponentBase::UWeaponComponentBase(const FObjectInitializer& ObjectIniti
     bAutoActivate = true;
     bAllowReregistration = true;
     bAutoRegister = true;
-    
-//    SaveConfig();
-//    LoadConfig();
 }
 
 // Called when the game starts
@@ -92,7 +86,6 @@ void UWeaponComponentBase::FireShot(EWeaponFunction WeaponFunction)
     this->CurrentWeaponFunction = WeaponFunction;
     bool Handled = false;
     this->OnStartedShooting(WeaponFunction, Handled);
-//    this->OnStartShooting(WeaponFunction, Handled);
     if(!Handled)
     {
         ExecFireShot(WeaponFunction);

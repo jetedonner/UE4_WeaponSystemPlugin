@@ -19,8 +19,6 @@ class WEAPONSYSTEM_API UFloatingHealthBarWidget : public UUserWidget
 	GENERATED_BODY()
 	
 protected:
-    // Doing setup in the C++ constructor is not as
-    // useful as using NativeConstruct.
     virtual void NativeConstruct() override;
     
 public:

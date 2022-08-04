@@ -30,19 +30,6 @@ int32 UCrossCrosshairUserWidget::NativePaint(const FPaintArgs& Args, const FGeom
     DrawLine(Context, FVector2D(CenterPosition.X + 1, CenterPosition.Y + 1), FVector2D(CenterPosition.X - 1, CenterPosition.Y - 1));
     
     DrawLine(Context, FVector2D(CenterPosition.X - 1, CenterPosition.Y + 1), FVector2D(CenterPosition.X + 1, CenterPosition.Y - 1));
-
-//    template<typename PointType>
-//    UWidgetBlueprintLibrary::DrawPoint
-//    (
-//        const PointType & Position,
-//     Tint,
-//        3.0f
-//    )
     
     return LayerId;
 }
-
-//void UCrossCrosshairUserWidget::DrawLine(FPaintContext Context, FVector2D PositionA, FVector2D PositionB) const
-//{
-//    UWidgetBlueprintLibrary::DrawLine(Context, PositionA, PositionB, Tint, bAntiAlias, Thickness);
-//}

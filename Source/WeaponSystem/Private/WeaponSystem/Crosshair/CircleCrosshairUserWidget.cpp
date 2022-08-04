@@ -10,8 +10,6 @@
 
 void UCircleCrosshairUserWidget::NativeConstruct()
 {
-//    FillAnimationsMap();
-    
     Super::NativeConstruct();
     
     FVector2D MySize = FVector2D(Radius * 2, Radius * 2);

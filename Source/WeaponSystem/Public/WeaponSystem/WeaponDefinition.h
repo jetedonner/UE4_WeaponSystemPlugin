@@ -15,7 +15,6 @@
 #include "Engine/Texture2D.h"
 #include "Materials/MaterialInterface.h"
 #include "WeaponFunctionDefinition.h"
-//#include "WeaponSystem/WeaponSystemProjectileBase.h"
 #include "WeaponSystem/Crosshair/CrosshairUserWidgetBase.h"
 #include "Blueprint/UserWidget.h"
 #include "WeaponDefinition.generated.h"
@@ -45,9 +44,6 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     int32 PickUpCount = 30;
     
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float Cadence = 1.0;
-//    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     float ReloadTimeout = 1.0;
     

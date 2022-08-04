@@ -72,8 +72,7 @@ void AHitableActorBase::Tick(float DeltaTime)
 
 void AHitableActorBase::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-    //this->ExecActorHitHandler(OtherActor, Hit);
-    //this->OnComponentGotHit(HitComponent, OtherActor, NormalImpulse, Hit);
+
 }
 
 void AHitableActorBase::OnComponentGotHit_Implementation(UPrimitiveComponent* HitComponent, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)

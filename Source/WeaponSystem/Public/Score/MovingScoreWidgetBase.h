@@ -11,7 +11,6 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "Animation/WidgetAnimation.h"
-//#include "Health/HealthManagerComponent.h"
 #include "MovingScoreWidgetBase.generated.h"
 
 UCLASS()
@@ -20,8 +19,6 @@ class WEAPONSYSTEM_API UMovingScoreWidgetBase : public UUserWidget
 	GENERATED_BODY()
 	
 protected:
-    // Doing setup in the C++ constructor is not as
-    // useful as using NativeConstruct.
     virtual void NativeConstruct() override;
     
 public:

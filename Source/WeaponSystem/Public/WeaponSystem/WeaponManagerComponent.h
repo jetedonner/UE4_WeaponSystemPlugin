@@ -28,7 +28,6 @@ class WEAPONSYSTEM_API UWeaponManagerComponent : public USceneComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
 	UWeaponManagerComponent();
 
 protected:
@@ -41,11 +40,9 @@ protected:
     
     class UtilityTimer* TimerUtil = new UtilityTimer();
     
-	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
+public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System", meta=(RequiredAssetDataTags="RowStructure=WeaponDefinition"))
@@ -62,9 +59,6 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="Weapon System")
     void IsAimedAt(bool& IsAimedAtTarget, FHitResult& HitResult);
-//    {
-//        IsAimedAtTarget = isHit;//(IsAimedAtHitable || IsAimedAtChar || IsAimedAtPickup);
-//    }
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     bool isHit = false;
@@ -79,28 +73,9 @@ public:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     FHitResult MyHitResult;
-    
-//    UFUNCTION(BlueprintPure, BlueprintInternalUseOnly)
-//    bool GetIsReloading() { return (CurrentWeapon != nullptr ? CurrentWeapon->IsReloading : false ); }
-//
-//    UFUNCTION(BlueprintCallable, BlueprintInternalUseOnly)
-//    void SetIsReloading(const bool NewVal)
-//    {
-//        if(CurrentWeapon != nullptr)
-//        {
-//            CurrentWeapon->IsReloading = NewVal;
-//        }
-//    }
-//
-//    UPROPERTY(BlueprintGetter=GetIsReloading, BlueprintSetter=SetIsReloading, Category="Weapon System")
-//    bool IsReloading;// = false;
-//    int32 ClipAmmoCount;
-//
+
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Weapon System")
     bool IsReloading = false;
-    
-//    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Weapon System")
-//    bool IsShooting = false;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     FVector MuzzleOffset;
@@ -128,8 +103,7 @@ public:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     EWeaponFunction CurrentWeaponFunction;
-    
-    // Internal Functions
+
     void GetCurrentWeaponFunctionDefinitionInt(FWeaponFunctionDefinition& WeaponFunctionDefinition);
     
     UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
@@ -176,7 +150,4 @@ public:
     
     UPROPERTY(BlueprintAssignable, Category="Weapon System")
     FWeaponStoppedShootingDelegate OnWeaponStoppedShootingDelegate;
-    
-//    UFUNCTION(BlueprintImplementableEvent,  Category = "Weapon System")
-//    void OnChangeWeapon(int32 WeaponID);
 };

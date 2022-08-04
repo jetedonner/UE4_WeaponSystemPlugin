@@ -161,7 +161,7 @@ void AWeaponSystemProjectileBase::OnHit(UPrimitiveComponent* HitComponent, AActo
 
 void AWeaponSystemProjectileBase::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
 {
-    UDbg::DbgMsg(FString::Printf(TEXT("Projectile BeginOverlap => Yesss!!!")), 5.0f, FColor::Green);
+//    UDbg::DbgMsg(FString::Printf(TEXT("Projectile BeginOverlap => Yesss!!!")), 5.0f, FColor::Green);
 }
 
 void AWeaponSystemProjectileBase::OutsideWorldBounds()

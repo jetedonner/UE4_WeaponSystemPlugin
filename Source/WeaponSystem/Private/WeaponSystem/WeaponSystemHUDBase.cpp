@@ -22,9 +22,7 @@ AWeaponSystemHUDBase::AWeaponSystemHUDBase()
     }
     else
     {
-//        UE_LOG(LogTemp, Warning, TEXT("MyWidgetClass IS LOADED ..."));
         AllUIWidgets.Add(MyWidgetClass);
-//        UE_LOG(LogTemp, Warning, TEXT("MyWidgetClass ADDED ..."));
     }
 }
 

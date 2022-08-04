@@ -23,21 +23,13 @@ class WEAPONSYSTEM_API AWeaponSystemHUDBase : public AHUD
 public:
     AWeaponSystemHUDBase();
 
-    /*
-    *     VARIABLES
-    */
 protected:
-    // All on screen widgets to add to the HUD on BeginPlay
     UPROPERTY(EditAnywhere, Category="Weapon System")
     TArray<TSubclassOf<class UUserWidget>> AllUIWidgets;
 
 private:
-    // Current list of created UI widgets that are constantly active on screen
     TArray<class UUserWidget*> CreatedWidgets;
 
-    /*
-    *     METHODS
-    */
 protected:
     virtual void BeginPlay() override;
     virtual void DrawHUD() override;

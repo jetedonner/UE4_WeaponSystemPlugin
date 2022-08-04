@@ -205,15 +205,11 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
                     GetWorld()->GetTimerManager().ClearTimer(ShootingTimerHandle);
                 }
                 
-//                UE_LOG(LogTemp, Warning, TEXT("UWeaponManagerComponent::SetCurrentWeapon: %i ..."), WeaponID);
-                
                 CurrentWeapon = Weapon;
                 
                 AWeaponSystemCharacterBase* MyOwner = Cast<AWeaponSystemCharacterBase>(this->GetOwner());
                 if(CurrentWeapon && MyOwner && MyOwner->IsPlayerControlled())
                 {
-                    // Get the widget class
-                    
                     if(CurrentCSWidget)
                     {
                         CurrentCSWidget->RemoveFromViewport();
@@ -228,12 +224,11 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
                         {
                             UDbg::DbgMsg(FString::Printf(TEXT("HAS New CS Widget")), 5.0f, FColor::Green);
                             
-                            CurrentCSWidget = CreateWidget<UUserWidget>(GetWorld(), CSWidgetClass/*, FName(TEXT("CSWidget"))*/);
+                            CurrentCSWidget = CreateWidget<UUserWidget>(GetWorld(), CSWidgetClass);
                             if (CurrentCSWidget)
                             {
                                 UDbg::DbgMsg(FString::Printf(TEXT("Adding Current CS Widget")), 5.0f, FColor::Green);
                                 CurrentCSWidget->AddToViewport();
-//                                bShowMouseCursor = true;
                             }
                         }
                 }
@@ -242,11 +237,6 @@ void UWeaponManagerComponent::SetCurrentWeapon(int32 WeaponID, bool PlayAudio)
                 {
                     UAudioComponent* AudioComponent = UGameplayStatics::SpawnSoundAtLocation(this, this->WeaponChangeSound, GetOwner()->GetActorLocation(), FRotator::ZeroRotator, 2.0, 1.0, 0.0f, nullptr, nullptr, true);
                 }
-//                if(IsShooting)
-//                {
-//                    GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrentWeapon->WeaponDefinition()->Cadence, true, 0.0f);
-//                }
-//                this->OnChangeWeapon(WeaponID);
                 break;
             }
         }
@@ -266,8 +256,6 @@ void UWeaponManagerComponent::ProjectileFired(class AActor* ProjectileActor)
 
 void UWeaponManagerComponent::StartShooting(EWeaponFunction WeaponFunction)
 {
-//    UE_LOG(LogTemp, Warning, TEXT("UWeaponManagerComponent::StartShooting()"));
-    
     if(IsReloading)
     {
         if(!IsShooting)
@@ -280,17 +268,10 @@ void UWeaponManagerComponent::StartShooting(EWeaponFunction WeaponFunction)
     if(CurrentWeapon != NULL)
     {
         CurrentWeaponFunction = WeaponFunction;
-//        CurrentWeapon->MuzzleOffset = MuzzleOffset;
+        
         uint32 Tock = TimerUtil->Tock();
-        float CurrCadence = 0.95f;
-        if(CurrentWeaponFunction == EWeaponFunction::Primary)
-        {
-            CurrCadence = CurrentWeapon->WeaponDefinition()->PrimaryWeaponFunctionDefinition.Cadence;
-        }
-        else
-        {
-            CurrCadence = CurrentWeapon->WeaponDefinition()->SecondaryWeaponFunctionDefinition.Cadence;
-        }
+        
+        float CurrCadence = CurrentWeapon->WeaponFunctionDefinition().Cadence;
         
         if(!IsShooting){
             if(Tock == 0)
@@ -298,30 +279,29 @@ void UWeaponManagerComponent::StartShooting(EWeaponFunction WeaponFunction)
                 IsShooting = true;
                 TimerUtil->Tick();
                 
-                GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/, true, 0.0f);
+                GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence, true, 0.0f);
                 return;
             }
         }
 
-        if(!IsShooting && (Tock == 0 || (Tock / 10000000.0f) >= CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/))
+        if(!IsShooting && (Tock == 0 || (Tock / 10000000.0f) >= CurrCadence))
         {
             IsShooting = true;
             TimerUtil->Tick();
 
-            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/, true, 0.0f);
+            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence, true, 0.0f);
             if(Tock == 0){
                 FireShot();
             }
-        }else if(!IsShooting && (Tock / 10000000.0f) < CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/){
+        }else if(!IsShooting && (Tock / 10000000.0f) < CurrCadence){
             IsShooting = true;
-            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/, true, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/ - (Tock / 10000000.0f));
+            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence, true, CurrCadence - (Tock / 10000000.0f));
         }
     }
 }
 
 void UWeaponManagerComponent::StopShooting()
 {
-//    UDbg::DbgMsg(FString(TEXT("STOPPING SHOOTING")), 5.0f, FColor::Yellow);
     if(IsShooting)
     {
         IsShooting = false;
@@ -333,7 +313,6 @@ void UWeaponManagerComponent::StopShooting()
         CurrentWeapon->ReadyForNewShot = true;
     }
     
-    //OnWeaponStoppedShootingDelegate.Broadcast(CurrentWeapon);
     if(CurrentWeapon->ShotAudioComponent)
     {
         CurrentWeapon->ShotAudioComponent->Stop();
@@ -365,7 +344,6 @@ void UWeaponManagerComponent::StartReloading()
     
     if(IsReloading)
     {
-//        IsReloading = true;
         GetWorld()->GetTimerManager().ClearTimer(ReloadingStartTimerHandle);
 
         if(CurrentWeapon->WeaponDefinition()->PlayReloadSound)
@@ -385,16 +363,7 @@ void UWeaponManagerComponent::FinishReloading()
         
         if(IsShooting)
         {
-            float CurrCadence = 0.95f;
-            if(CurrentWeaponFunction == EWeaponFunction::Primary)
-            {
-                CurrCadence = CurrentWeapon->WeaponDefinition()->PrimaryWeaponFunctionDefinition.Cadence;
-            }
-            else
-            {
-                CurrCadence = CurrentWeapon->WeaponDefinition()->SecondaryWeaponFunctionDefinition.Cadence;
-            }
-            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrCadence /*CurrentWeapon->WeaponDefinition()->Cadence*/, true, 0.0f);
+            GetWorld()->GetTimerManager().SetTimer(ShootingTimerHandle, this, &UWeaponManagerComponent::FireShot, CurrentWeapon->WeaponFunctionDefinition().Cadence, true, 0.0f);
         }
     }
 }
@@ -418,7 +387,6 @@ void UWeaponManagerComponent::FireShot()
                 AmmoCnt = CurrentWeapon->AmmoCount;
             }
             
-//            CurrentWeapon->MuzzleOffset = GetComponentLocation();
             CurrentWeapon->FireShot(CurrentWeaponFunction);
 
             if(AmmoCnt > -1)

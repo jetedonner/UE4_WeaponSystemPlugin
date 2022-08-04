@@ -26,7 +26,6 @@ class WEAPONSYSTEM_API AWeaponPickupActorBase : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AWeaponPickupActorBase();
     AWeaponPickupActorBase(const FObjectInitializer& ObjectInitializer);
     
@@ -63,11 +62,9 @@ public:
     class USoundCue* PickupSound;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
+public:
 	virtual void Tick(float DeltaTime) override;
 
     UFUNCTION(BlueprintCallable, Category="Weapon System")

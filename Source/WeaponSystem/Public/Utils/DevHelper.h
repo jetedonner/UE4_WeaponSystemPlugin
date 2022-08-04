@@ -29,8 +29,4 @@ public:
     
     UPROPERTY(Config)
     bool DebugMode = true;
-    
-//    UFUNCTION(BlueprintCallable, Category="Debug")
-//    static void DbgMsg(const FString& DebugMessage, float Duration = 5.f, FColor TextColor = FColor::Red, const bool ConsoleOnly = false);
-    
 };

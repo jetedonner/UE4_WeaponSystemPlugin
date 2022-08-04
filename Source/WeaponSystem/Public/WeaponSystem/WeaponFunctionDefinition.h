@@ -41,7 +41,7 @@ public:
     {
         this->WeaponFunction = _WeaponFunction;
     }
-//    VisibleAnywhere, 
+    
     UPROPERTY(BlueprintReadOnly, Category="Weapon System")
     EWeaponFunction WeaponFunction;
     
@@ -50,9 +50,6 @@ public:
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     float Cadence = 1.0;
-    
-//    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
-//    float ReloadTimeout = 1.0;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     class USoundCue* ShootingSound;

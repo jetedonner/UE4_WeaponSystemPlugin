@@ -28,14 +28,11 @@ public:
 	UWeaponComponentBase();
     UWeaponComponentBase(const FObjectInitializer& ObjectInitializer);
     
-
 protected:
 
 	virtual void BeginPlay() override;
     
 public:
-    
-    
     
     FTimerHandle ReloadingEndTimerHandle;
     FTimerHandle ReloadingStartTimerHandle;
@@ -55,7 +52,6 @@ public:
         }
     }
     
-    // Internal Functions
     void GetMuzzleRotationInt(FRotator& MuzzleRotation, FVector& MuzzleLocRet);
     
     UFUNCTION(BlueprintPure, BlueprintInternalUseOnly, Category="Weapon System")
@@ -110,8 +106,6 @@ public:
     UPROPERTY(BlueprintGetter=GetClipAmmoCount, Category="Weapon System")
     int32 ClipAmmoCount;
 	
-//	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-    
     UFUNCTION(BlueprintCallable, Category="Weapon System")
     void GetWeaponID(int32& WeaponID);
     
@@ -127,10 +121,10 @@ public:
     
     FWeaponFunctionDefinition WeaponFunctionDefinition();
 
-    UPROPERTY()//EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    UPROPERTY()
     TSubclassOf<AWeaponSystemProjectileBase> Projectile;
 
-    UPROPERTY()//EditAnywhere, BlueprintReadWrite, Category="Weapon System")
+    UPROPERTY()
     TSubclassOf<AWeaponSystemProjectileBase> ProjectileSecondary;
 		
     UFUNCTION(BlueprintCallable, Category="Weapon System")
@@ -153,9 +147,6 @@ public:
     
     UPROPERTY(BlueprintAssignable, Category="Weapon System")
     FWeaponStoppedShootingDelegate OnWeaponStoppedShootingDelegate;
-    
-//    UPROPERTY(BlueprintAssignable, Category="Weapon System")
-//    FWeaponStartedShootingDelegate OnWeaponStartedShootingDelegate;
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon System")
     EWeaponFunction CurrentWeaponFunction;
